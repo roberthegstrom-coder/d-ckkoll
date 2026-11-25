@@ -1,0 +1,1188 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Däckkoll LV</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1b2530">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+:root{--bg:#e8ecef;--panel:#fff;--ink:#1b2530;--mute:#5b6773;--line:#cdd5db;--ok:#2b7a4b;--warn:#b87800;--bad:#b3321f;--okbg:#dcefe3;--warnbg:#f7e8c4;--badbg:#f5d9d3;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12181e;--panel:#1c242c;--ink:#e6ebef;--mute:#94a1ad;--line:#33404b;--ok:#5fc08a;--warn:#e0b04a;--bad:#ef8672;--okbg:#1d3a2a;--warnbg:#3d3115;--badbg:#44211b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12181e;--panel:#1c242c;--ink:#e6ebef;--mute:#94a1ad;--line:#33404b;--ok:#5fc08a;--warn:#e0b04a;--bad:#ef8672;--okbg:#1d3a2a;--warnbg:#3d3115;--badbg:#44211b;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.45 "Source Sans 3",system-ui,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:16px}
+h1{font:700 40px/1 "Barlow Condensed","Arial Narrow",sans-serif;margin:8px 0 14px;letter-spacing:.2px}
+h2{font:600 24px/1.1 "Barlow Condensed","Arial Narrow",sans-serif;margin:0 0 10px}
+nav{display:flex;flex-wrap:wrap;gap:4px;background:var(--line);padding:4px;border-radius:10px;margin-bottom:16px}
+nav a{flex:1 1 auto;text-align:center;white-space:nowrap;padding:9px 4px;border-radius:7px;color:var(--ink);text-decoration:none;font-weight:600}
+nav a[aria-current="page"]{background:var(--panel);box-shadow:0 1px 2px rgba(0,0,0,.18)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.panel{background:var(--panel);border-radius:12px;padding:16px;margin-bottom:14px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fields .full{grid-column:1/-1}
+label{display:block;font-size:14px;color:var(--mute);margin-bottom:3px}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px}
+.wheels{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.wheels input{font:700 28px/1 "Barlow Condensed","Arial Narrow",sans-serif;padding:8px 10px;margin-bottom:10px}
+.g{position:relative;height:10px;background:var(--line);border-radius:5px}
+.g i{position:absolute;left:0;top:0;bottom:0;border-radius:5px;transition:width .25s}
+.g b{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);opacity:.55}
+.note{font-size:14px;color:var(--mute);margin:12px 0 0}
+.btn,button{font:600 16px/1 "Source Sans 3",system-ui,sans-serif;border:0;border-radius:8px;padding:12px 16px;background:var(--ink);color:var(--bg);cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);padding:8px 12px;font-size:14px}
+.save{width:100%;margin-top:14px;padding:15px;font-size:18px}
+.err{color:var(--bad);min-height:20px;margin-top:8px;font-weight:600}
+.sumline{margin-top:6px;font-weight:600}
+.pill{padding:3px 10px;border-radius:99px;font-size:14px;font-weight:600;white-space:nowrap}
+.pill.ok{background:var(--okbg);color:var(--ok)}.pill.warn{background:var(--warnbg);color:var(--warn)}.pill.bad{background:var(--badbg);color:var(--bad)}
+.ctrl{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.ctrl .full{grid-column:1/-1}
+details.card{background:var(--panel);border-radius:12px;margin-bottom:10px}
+summary{list-style:none;padding:14px;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.nm{font-size:18px;margin-right:10px}
+.sub{color:var(--mute);font-size:14px;margin-right:10px}
+.sub.blk{display:block;margin:8px 0 0}
+.hist{padding:0 14px 14px;border-top:1px solid var(--line)}
+.h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+.empty{color:var(--mute);padding:20px 4px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:10px;margin-bottom:14px}
+.tile{background:var(--panel);border-radius:12px;padding:12px}
+.tile b{display:block;font:700 34px/1 "Barlow Condensed","Arial Narrow",sans-serif}
+.tile span{font-size:14px;color:var(--mute)}
+.dist{display:flex;gap:3px;height:30px;border-radius:8px;overflow:hidden}
+.dist i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:600}
+.dist i.bad{background:var(--badbg);color:var(--bad)}.dist i.warn{background:var(--warnbg);color:var(--warn)}.dist i.ok{background:var(--okbg);color:var(--ok)}
+.sr{display:grid;grid-template-columns:1fr 1.2fr 64px;gap:10px;align-items:center;padding:7px 0}
+.sr b{text-align:right}
+.tr{display:grid;grid-template-columns:1fr 1.2fr;gap:10px;align-items:center;padding:7px 0}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:99px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+.axl{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.axl label{display:flex;align-items:center;gap:6px;color:var(--ink);font-size:15px;border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:0}
+.axl input{width:auto;padding:0;margin:0}
+.wheels input::placeholder{font-size:14px;font-weight:400}
+.nw{display:flex;align-items:center;gap:8px;margin:8px 0 0;font-size:15px;color:var(--ink)}
+.wheels .nw input{width:22px;height:22px;padding:0;margin:0}
+.wheels input.bw{font:400 15px "Source Sans 3",system-ui,sans-serif;padding:7px 9px;margin:10px 0 0}
+.chk{display:flex;align-items:center;gap:10px;color:var(--ink);font-size:16px;margin:0;cursor:pointer}
+.px,.xx{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 0 8px}.xx select{grid-column:1/-1}
+.wheels .px input,.wheels .xx input{font:600 16px/1.2 "Source Sans 3",system-ui,sans-serif;padding:8px;margin:0}
+#wheels:not(.show3) .px,#wheels:not(.show3) .m3{display:none}#wheels:not(.showx) .xx{display:none}
+.unev{color:var(--warn);font-weight:600}
+#due .tr{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.chk input{width:22px;height:22px;padding:0;margin:0}
+.axsvg{display:block;margin:12px auto 6px;width:100%;max-width:340px;height:auto;max-height:760px}
+.lb{font-size:12px}
+.wn{font:700 15px "Source Sans 3",system-ui,sans-serif;fill:#fff}
+.wh.sel{stroke-width:4}
+.at{font:600 9px "Source Sans 3",system-ui,sans-serif;fill:var(--mute)}
+.wt{fill:var(--panel)}
+.wh.sel{stroke:var(--ink);stroke-width:3}
+@media (prefers-reduced-motion:reduce){.g i,#toast{transition:none}}
+@media (max-width:420px){.sr{grid-template-columns:1fr 1fr 58px}nav a{font-size:13px;padding:9px 2px}}
+.sheet{background:var(--panel);border-radius:12px;padding:16px;margin-bottom:14px}
+h3{font:600 18px/1.1 "Barlow Condensed","Arial Narrow",sans-serif;margin:14px 0 4px}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin:12px 0}
+.tb{width:100%;border-collapse:collapse;margin:8px 0;font-size:15px}
+.tb th,.tb td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+.fold{background:var(--panel);border-radius:12px;margin-bottom:10px}
+.amk{border:1px solid var(--line)}.amp{border:1px solid var(--line);background:var(--bg)}.amp>summary{font-size:16px;padding:10px 12px}
+.fold>summary{padding:14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:18px}
+.fold:not([open])>summary::after{content:'▸';color:var(--mute)}
+.fold[open]>summary::after{content:'▾';color:var(--mute)}
+.fold .sheet{border-radius:0;margin:0;padding:14px;border-top:1px solid var(--line);background:transparent}
+.fbtn{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 12px}
+.fold .card{margin:0 10px 10px;background:var(--bg)}
+.fold.car{margin:0 10px 10px;background:var(--bg)}
+.fold.car>summary{font-size:16px;padding:12px}
+.fold.car .card{margin:0 8px 8px;background:var(--panel)}
+#rep>.fold>summary{font:600 22px/1.1 "Barlow Condensed","Arial Narrow",sans-serif}
+#rep>.fold>.fold{background:var(--bg);margin:0 10px 10px}
+.steps{display:flex;gap:6px;margin-bottom:14px}
+.steps .st{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:13px;color:var(--mute);font-weight:600}
+.steps .st i{font-style:normal;width:28px;height:28px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px}
+.steps .st.on{color:var(--ink)}
+.steps .st.on i{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.steps .st.done i{border-color:var(--ok);color:var(--ok)}
+.navb{display:flex;gap:10px;margin-top:6px}
+.navb button{flex:1;padding:15px;font-size:17px}
+@media print{
+ :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{--bg:#fff;--panel:#fff;--ink:#000;--mute:#444;--line:#bbb;--ok:#2b7a4b;--warn:#b87800;--bad:#b3321f;--okbg:#dcefe3;--warnbg:#f7e8c4;--badbg:#f5d9d3;padding:0;color-scheme:light}
+ body{background:#fff}
+ nav,h1,.noprint,#toast{display:none!important}
+ .wrap{max-width:none;padding:0}
+ .sheet{break-after:page;border-radius:0;padding:0;margin:0 0 8mm}
+ #rep>.fold:last-child .sheet:last-child{break-after:auto}
+ #rep summary,#hlist summary,.fbtn{display:none!important}
+ #rep>.fold.regf{display:none!important}
+ .fold,#hlist .card{background:none;margin:0}
+ #hlist .hist{border:0;padding:0}
+ .fold .sheet{border:0;padding:0}
+ body.one .sheet:not(.on){display:none}
+}
+
+#oldview{position:fixed;inset:0;z-index:50;background:var(--bg);overflow:auto;padding:12px 16px 40px}
+#oldview .oldin{max-width:760px;margin:0 auto}
+#oldview .bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+@media print{body.oldopen .wrap,body.oldopen #toast{display:none!important}#oldview{position:static;overflow:visible;padding:0}}
+#wheels:not(.showb) .bw{display:none}
+.pt img{width:96px;height:96px;object-fit:cover;border-radius:8px;margin:0 6px 6px 0}
+#syncbar{display:flex;justify-content:space-between;gap:8px;align-items:center;margin:-4px 0 10px;font-size:13px;color:var(--mute)}
+#syncbar button{padding:4px 10px;font-size:13px}
+#login{position:fixed;inset:0;background:var(--bg);z-index:50;overflow:auto;padding:16px}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+<h1>Däckkoll LV</h1><p class="note" style="margin:-6px 0 12px">Lastbilar, släp och maskiner</p>
+<div id="syncbar"><span id="syncst"></span></div>
+
+<nav><a id="t-mat" href="#mat">Mät</a><a id="t-kunder" href="#kunder">Kunder</a><a id="t-rapport" href="#rapport">Rapport</a><a id="t-inst" href="#inst">Inställningar</a></nav>
+<input id="gq" type="search" placeholder="Sök kund, regnr, maskin-ID, telefon eller ort" aria-label="Sök överallt" style="margin:0 0 12px" oninput="gsearch(true)" onkeydown="if(event.key==='Enter')gsearch()" onsearch="gsearch()">
+
+<section id="mat">
+  <div id="tcbar" class="note" hidden style="margin:0 0 12px;padding:10px;border:1px solid var(--warn);border-radius:8px"><b>Däckbyte.</b> Markera Nytt däck och fyll i djup bara på de däck som byttes. Övriga djup hämtas från förra mätningen. <button class="ghost" onclick="tcStop()">Avbryt</button></div>
+  <div id="editbar" class="note" hidden style="margin:0 0 12px">Redigerar mätning från <b id="editdate"></b>. <button class="ghost" onclick="cancelEdit()">Avbryt redigering</button></div>
+  <div id="stepbar" class="steps" aria-label="Steg"></div>
+
+  <div class="step" id="s1">
+    <div class="panel">
+      <h2>Registreringsnummer</h2>
+      <label for="reg">Registreringsnummer eller maskin-ID</label>
+      <input id="reg" autocomplete="off" autocapitalize="characters" list="reglist" onfocus="fillRegs()" onchange="this.value=normReg(this.value);lookupReg();evChg()" onkeydown="if(event.key==='Enter'){event.preventDefault();nextStep()}"><datalist id="reglist"></datalist>
+      <label id="scan" for="pic" hidden style="display:none;margin:8px 0 0;padding:8px 12px;border:1px solid var(--line);border-radius:8px;color:var(--ink);font-size:14px;font-weight:600;cursor:pointer">Läs från foto</label><input id="pic" type="file" accept="image/*" style="position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none" onchange="scanPlate(this)">
+      <div class="sub" id="scanmsg" role="status" style="margin-top:6px"></div>
+    </div>
+  </div>
+
+  <div class="step" id="s2" hidden>
+    <div class="panel">
+      <h2>Kund och fordon</h2>
+      <div id="found" hidden></div>
+      <div id="custf" class="fields">
+        <div class="full"><label for="vt">Fordonstyp</label><select id="kat" onchange="katChg()"><option value="">Välj fordonstyp</option><option value="lb">Lastbil</option><option value="bu">Buss</option><option value="sl">Släp</option><option value="hj">Hjullastare</option><option value="gr">Grävmaskin</option><option value="du">Dumper</option><option value="tr">Traktor</option><option value="ov">Övrig</option></select><select id="vt" hidden onchange="typeChg()"><option value="tl">Tung lastbil, buss</option><option value="sl">Släp</option><option value="ar">Arbetsmaskin</option></select></div>
+        <div><label for="name">Namn</label><input id="name" autocomplete="off" list="namelist" onchange="lookupName()"><datalist id="namelist"></datalist></div>
+        <div><label for="contact">Kontaktperson</label><input id="contact" autocomplete="off"></div>
+        <div hidden><input id="driver" type="hidden"></div>
+        <div class="full"><label for="veh">Fordon eller maskin (märke, modell, årsmodell)</label><input id="veh" autocomplete="off" list="vehlist"><datalist id="vehlist"></datalist></div>
+        <div><label for="phone">Telefon</label><input id="phone" type="tel"></div>
+        <div><label for="email">E-post</label><input id="email" type="email" autocomplete="off" autocapitalize="off" inputmode="email"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" id="s3" hidden>
+    <div class="panel">
+      <h2>Däck</h2>
+      <div class="fields">
+        <div id="ntw"><label for="nt">Antal däck</label><input id="nt" type="number" min="1" max="24" inputmode="numeric" value="4" oninput="buildW()"></div>
+        <div id="prew" class="full" hidden><label for="pre">Axelupplägg</label><select id="pre" onchange="preApply()"></select></div>
+        <div id="axw" hidden><label for="na">Antal axlar</label><input id="na" type="number" min="1" max="8" inputmode="numeric" value="3" oninput="buildAx()"></div>
+        <div id="axd" class="full" hidden></div>
+        <div id="dimw"><label for="dim">Dimension</label><input id="dim" list="dimlist" onchange="this.value=normDim(this.value)" placeholder="315/80R22.5 eller 23.5R25" autocomplete="off"><datalist id="dimlist"></datalist></div>
+        <div><label for="brand">Däckfabrikat (alla däck)</label><input id="brand" autocomplete="off" list="brandlist"><datalist id="brandlist"></datalist></div>
+        <div id="setw"><label for="setn">Setnamn (valfritt)</label><input id="setn" autocomplete="off" placeholder="t.ex. Set 1" list="setlist"><datalist id="setlist"></datalist></div>
+        <div id="seasw"><label for="season">Däcktyp</label><select id="season" onchange="seasonChg()"><option value="s">Sommardäck</option><option value="v">Vinterdäck</option><option value="a">Året runt</option></select></div>
+        <div id="wtw" hidden><label for="wt">Typ av vinterdäck</label><select id="wt"><option value="">Välj typ</option><option value="d">Dubbat</option><option value="f">Friktion</option></select></div>
+        <div><label for="odo" id="odol">Mätarställning (km)</label><input id="odo" type="number" min="0" step="1" inputmode="numeric"></div>
+        <div><label for="rim">Fälg</label><select id="rim" onchange="rimChg()"><option value="">Välj fälg</option><option value="al">Aluminiumfälg</option><option value="pl">Plåtfälg</option></select></div>
+        <div class="full" id="tpmsw"><label class="chk" for="tpms"><input id="tpms" type="checkbox">TPMS (däcktrycksövervakning)</label></div>
+        <div id="locw" hidden><input id="loc" type="hidden"><datalist id="loclist"></datalist></div>
+        <div id="evw" hidden><select id="ev"><option value=""></option></select></div>
+        <div><label for="plats">Mätplats / ort</label><input id="plats" list="platslist" autocomplete="off" placeholder="t.ex. Verkstaden Umeå"><datalist id="platslist"></datalist></div>
+        <div><label for="date">Datum</label><input id="date" type="date"></div>
+        <div class="full"><label for="note">Anteckning</label><textarea id="note" rows="2" placeholder="t.ex. byte av bil, rör ej, ALU-fälg"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" id="s4" hidden>
+    <div class="panel" id="arx" hidden>
+      <h2>Gränser för maskin</h2>
+      <div class="fields">
+        <div class="full"><label for="nd">Nytt däckdjup (mm)</label><input id="nd" type="number" step="0.5" min="0" inputmode="decimal" oninput="upd()"></div>
+        <div><label for="bp">Byt nu vid (% kvar)</label><input id="bp" type="number" min="0" max="100" inputmode="numeric" oninput="upd()"></div>
+        <div><label for="wp">Byt snart vid (% kvar)</label><input id="wp" type="number" min="0" max="100" inputmode="numeric" oninput="upd()"></div>
+      </div>
+    </div>
+    <div class="panel" id="blep">
+      <h2>Mätsticka</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button id="bconn" onclick="bleConnect()">Anslut mätsticka</button><button class="ghost" onclick="seqStart()">Starta sekvens</button><button class="ghost" onclick="seqBack()">Föregående</button><button class="ghost" onclick="seqSkip()">Hoppa över</button><button class="ghost" onclick="seqStop()">Stoppa</button></div>
+      <div class="sumline" id="bstat"></div>
+      <p class="note" id="bmsg">Ordning: vänster sida framifrån och bakåt, sedan höger sida bakifrån och framåt. Med tre mätpunkter tas inner, mitt och ytter på varje däck. Varje värde du tar med stickan fylls i, du hör ett pip och sidan går vidare till nästa hjul. Om stickan i stället skriver in värdet som ett tangentbord räcker det att trycka på Starta sekvens.</p>
+      <details><summary style="padding:6px 0">Inställningar och felsökning</summary>
+        <label for="bscale">Tolkning av värdet</label>
+        <select id="bscale"><option value="auto">Automatisk</option><option value="x1">Värdet är i mm</option><option value="d10">Värdet delas med 10</option><option value="d100">Värdet delas med 100</option></select>
+        <p class="note" id="braw"></p>
+      </details>
+    </div>
+    <div class="panel">
+      <h2>Däckdjup per däck</h2>
+      <div id="axfig"></div><p class="note" style="text-align:center;margin:0 0 14px">Tryck på ett hjul för att skriva in djupet. Grön: bra. Gul: byt snart. Röd: byt nu. Grå: ej mätt. Fabrikat från steg 3 fylls i för alla däck och kan ändras per däck.</p>
+      <label class="chk" for="brt" style="display:block;margin:6px 0"><input id="brt" type="checkbox" onchange="brToggle()">Olika fabrikat per däck</label><label class="chk" for="p3t" style="display:block;margin:6px 0"><input id="p3t" type="checkbox" onchange="xToggle()">Tre mätpunkter per däck (inner, mitt, ytter)</label><label class="chk" for="xt" style="display:block;margin:6px 0"><input id="xt" type="checkbox" onchange="xToggle()">Tryck, DOT och regummerat eller omskuret per däck</label><p class="note" style="margin:4px 0 10px">Med tre mätpunkter räknas det lägsta värdet. Skiljer punkterna 2 mm eller mer markeras däcket med ojämnt slitage, som kan bero på hjulinställningen.</p>
+      <div class="wheels" id="wheels"></div>
+      <div class="panel" id="photow" hidden style="margin-top:12px"><h2>Foton (valfritt)</h2><input id="dmgpic" type="file" accept="image/*" capture="environment" multiple onchange="dmgPick(this)"><p class="note" id="dmgprev">Till exempel skador eller ojämnt slitage. Högst 3 foton.</p></div>
+      <div class="sumline" id="sum"></div>
+      <p class="note" id="rule"></p>
+    </div>
+  </div>
+
+  <div class="err" id="err" role="alert"></div>
+  <div class="navb"><button class="ghost" id="bk" onclick="goStep(cur-1)" hidden>Tillbaka</button><button id="nx" onclick="nextStep()">Nästa</button></div>
+  <div class="navb" id="prepw" hidden style="margin-top:8px"><button class="ghost" id="prepb" onclick="saveRec(true)" style="width:100%">Spara kund och fordon utan mätning</button></div>
+  <p class="note" id="prepn" hidden>Förbered fordonet nu och mät senare. Det hamnar under Att mäta på fliken Kunder och i Excel-exporten.</p>
+</section>
+
+
+
+
+
+<section id="kunder" hidden>
+  <div id="due"></div>
+  <div class="ctrl">
+    <input id="q" class="full" type="search" hidden style="display:none" placeholder="Sök namn, regnummer eller telefon" oninput="$('gq').value=this.value;renderList()" aria-label="Sök kund">
+    <select id="s" onchange="renderList()" aria-label="Sortera"><option value="min">Sortera: lägst däckdjup</option><option value="name">Sortera: namn</option><option value="date">Sortera: senast mätt</option></select>
+    <select id="f" onchange="renderList()" aria-label="Filtrera status"><option value="">Alla kunder</option><option value="bad">Byt nu</option><option value="warn">Byt snart</option><option value="ok">Bra</option></select>
+    <select id="ft" class="full" onchange="renderList()" aria-label="Filtrera fordonstyp"><option value="">Alla fordonstyper</option><option value="lb">Lastbil</option><option value="bu">Buss</option><option value="sl">Släp</option><option value="hj">Hjullastare</option><option value="gr">Grävmaskin</option><option value="du">Dumper</option><option value="tr">Traktor</option><option value="ov">Övrig</option></select>
+  </div>
+  <div id="list"></div>
+  
+</section>
+
+
+
+
+
+<section id="inst" hidden>
+  <div id="instset"></div>
+  <div id="tools" class="panel" style="margin-top:14px"></div>
+  <div id="impxbox"></div>
+</section>
+
+<section id="rapport" hidden>
+  <div class="noprint">
+    
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px"><button onclick="printAll()">Skriv ut alla blad</button><button class="ghost" onclick="saveRep()">Spara alla som PDF</button><button class="ghost" onclick="exportXlsx()">Exportera till Excel</button></div>
+    <p class="note" id="repmsg">Ett blad per fordon med senaste mätningen. Spara som PDF med knapparna här, eller välj Spara som PDF i utskriftsdialogen när du skriver ut.</p>
+  </div>
+  <div id="rep"></div>
+</section>
+</div>
+<div id="oldview" hidden><div class="oldin"><div class="bar noprint" id="oldbar"></div><div id="oldbody"></div></div></div>
+<div id="toast" role="status"></div>
+<div id="login" hidden><div class="panel" style="max-width:420px;margin:8vh auto">
+  <h2>Logga in</h2><p class="note" style="margin:0 0 12px">Logga in för att dela mätningar mellan telefoner och kollegor. Du kan mäta utan att vara inloggad, mätningarna skickas när du loggar in.</p>
+  <label for="lg_e">E-post</label><input id="lg_e" type="email" autocomplete="username" autocapitalize="off" inputmode="email">
+  <label for="lg_p" style="margin-top:8px">Lösenord</label><input id="lg_p" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+  <div class="navb" style="margin-top:12px"><button onclick="doLogin()">Logga in</button><button class="ghost" onclick="doSignup()">Skapa konto</button></div>
+  <p class="note" id="lg_m" role="alert"></p>
+  <div class="navb"><button class="ghost" onclick="doReset()">Glömt lösenord</button><button class="ghost" onclick="hideLogin()">Fortsätt utan inloggning</button></div>
+</div></div>
+
+<script>
+const normReg=v=>{v=String(v||'').trim().toUpperCase();const c=v.replace(/[\s-]/g,'');return /^[A-ZÅÄÖ]{3}\d{2}[\dA-Z]$/.test(c)?c:v.replace(/\s+/g,' ')};
+const KEY='dackkoll-lv-v1',$=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const POS=['Vänster fram','Höger fram','Vänster bak','Höger bak'],SEAS={s:'Sommardäck',v:'Vinterdäck',a:'Året runt'};
+const VT={pb:'Personbil, lätt lastbil',tl:'Tung lastbil, buss',sl:'Släp',ar:'Arbetsmaskin'},DEF={pb:4,tl:6,sl:6,ar:4};
+const NOTE={
+  pb:'Strecken visar gränserna för byt nu och byt snart: vinterdäck 3,1 mm och 5 mm, sommardäck 1,6 mm (lägsta lagkrav) och 3 mm.',
+  tl:'Lagkrav: minst 5 mm på alla däck 10 november till 10 april, annars 1,6 mm. Under vinterperioden blir däck under 5 mm röda (byt nu) och under 7 mm gula. Resten av året blir däck under 1,6 mm röda och under 5 mm gula, så att du ser vilka som inte klarar vintern.',
+  sl:'Lagkrav: minst 1,6 mm för släp till tung lastbil eller buss, året runt. Strecket vid 3 mm är en rekommendation, inte ett lagkrav. Välj axelupplägg eller antal axlar och vilka som har dubbelmontage.',
+  ar:'Arbetsmaskiner har inga fasta gränser här. Strecken visar dina egna gränser i procent av nytt däckdjup. Följ däcktillverkarens rekommendation.'};
+const KAT={lb:'Lastbil',bu:'Buss',sl:'Släp',hj:'Hjullastare',gr:'Grävmaskin',du:'Dumper',tr:'Traktor',ov:'Övrig'},KB={lb:'tl',bu:'tl',sl:'sl',hj:'ar',gr:'ar',du:'ar',tr:'ar',ov:'ar'},KDEF={hj:4,gr:4,du:6,tr:4,ov:4};
+const katOf=r=>r&&KAT[r.kat]?r.kat:(r&&r.vt==='sl'?'sl':r&&r.vt==='ar'?'ov':'lb'),KN=r=>KAT[katOf(r)];
+function katChg(){const k=$('kat').value;if(!k)return;$('vt').value=KB[k];typeChg()}
+let recs=[],cfg={bp:20,wp:40};
+try{recs=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){recs=[]}
+recs.forEach(r=>{if(r.reg)r.reg=normReg(r.reg)});
+recs.forEach(r=>{if(r.dim)r.dim=normDim(r.dim);if(r.axd)r.axd=r.axd.map(normDim);if(r.season!=='x'){r.season='x';r.wt='';r.setn=''}if(r.wt==='o')r.wt='f'});
+try{Object.assign(cfg,JSON.parse(localStorage.getItem(KEY+'-cfg')||'{}'))}catch(e){}
+function persist(){saveLocal();fillNames();trackChanges();flush()}
+function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(recs))}catch(e){}}
+const mn=d=>{const x=d.filter(v=>v!=null);return x.length?Math.min(...x):null};
+const WK=['lb','bu','sl'];
+const axwVal=()=>[...document.querySelectorAll('.axwc')].map(e=>e.value==='j'?true:e.value==='n'?false:null),axpVal=()=>[...document.querySelectorAll('.axp')].map(e=>numv(e.value));
+function setAxw(r){document.querySelectorAll('.axwc').forEach((e,i)=>{const v=editId&&r&&r.axw?r.axw[i]:null;e.value=v===true?'j':v===false?'n':''});document.querySelectorAll('.axp').forEach((e,i)=>e.value=r&&r.axp&&r.axp[i]!=null?r.axp[i]:'');const b=$('axwb');if(b)b.hidden=!WK.includes($('kat').value)}
+const winterLack=(r,ds)=>!!(r&&r.axw&&WK.includes(katOf(r))&&winterD(ds)&&r.axw.some(v=>v===false));
+const wTxt=r=>{if(!r.axw)return '';const n=r.axw.map((v,i)=>v===false?i+1:null).filter(Boolean),u=r.axw.map((v,i)=>v==null?i+1:null).filter(Boolean);if(!n.length&&!u.length)return 'Ja, alla axlar';if(u.length===r.axw.length)return 'Ej kontrollerat';return [n.length?'Saknas på axel '+n.join(', '):'',u.length?'ej kontrollerat på axel '+u.join(', '):''].filter(Boolean).join(', ')};
+function normDim(s){s=String(s||'').trim();if(!s)return '';const m=/^(\d{2,3})\s*\/\s*(\d{2})\s*(?:(?:R|-|\s)\s*(\d{2}(?:[.,]\d)?))?\s*(C)?\s*(?:ET\s*(\d{2,3}))?\s*$/i.exec(s);
+  if(!m){const m2=/^(\d{1,2}[.,]\d)\s*(?:R|-)\s*(\d{2})$/i.exec(s);return m2?m2[1].replace(',','.')+'R'+m2[2]:s}
+  return m[1]+'/'+m[2]+(m[3]?'R'+m[3].replace(',','.'):'')+(m[4]?'C':'')+(m[5]?' ET'+m[5]:'')}
+const isDim=v=>/^\s*\d{2,3}\s*\/\s*\d{2}/.test(String(v||''))||/^\s*\d{1,2}[.,]\d\s*[R-]\s*\d{2}/i.test(String(v||''));
+let RIMS=null;
+function buildRims(){const C={};recs.forEach(r=>[r.dim,...(r.axd||[])].forEach(d=>{const m=/^(\d{2,3}\/\d{2})R([\d.]+)/.exec(normDim(d));if(m){const k=m[1];(C[k]=C[k]||{})[m[2]]=(C[k][m[2]]||0)+1}}));RIMS={};Object.entries(C).forEach(([k,o])=>RIMS[k]=Object.entries(o).sort((a,b)=>b[1]-a[1])[0][0])}
+function dimFix(d){const n=normDim(d);if(!n)return '';const m=/^(\d{2,3}\/\d{2})(C)?( ET\d+)?$/.exec(n);if(m&&RIMS&&RIMS[m[1]])return m[1]+'R'+RIMS[m[1]]+(m[2]||'')+(m[3]||'');return n}
+function winterD(ds){ds=ds||new Date().toLocaleDateString('sv-SE');const m=+ds.slice(5,7),d=+ds.slice(8,10);return (m===11&&d>=10)||m===12||m<=3||(m===4&&d<=10)}
+function prof(r){const t=r.vt||'pb';
+  if(t==='ar'){const n=r.nd||0,b=r.bp!=null?r.bp:cfg.bp,w=r.wp!=null?r.wp:cfg.wp;return{bad:n*b/100,warn:n*w/100,max:n||20}}
+  if(t==='tl')return winterD(r.date)?{bad:cfg.tlbw!=null?cfg.tlbw:5,warn:cfg.tlw||7,max:16}:{bad:cfg.tlbs!=null?cfg.tlbs:1.6,warn:cfg.tls||5,max:16};
+  return t==='tl'?{bad:1.6,warn:5,max:16}:t==='sl'?{bad:cfg.slb!=null?cfg.slb:1.6,warn:cfg.slw||3,max:12}:(r.season==='v'||r.season==='a')?{bad:3.1,warn:5,max:8}:{bad:1.6,warn:3,max:8}}
+const st=(m,p)=>m==null?{c:'',t:'Ej mätt'}:m<p.bad?{c:'bad',t:'Byt nu'}:m<p.warn?{c:'warn',t:'Byt snart'}:{c:'ok',t:'Bra'};
+const fmt=v=>v==null?'–':v.toFixed(1).replace('.',',')+' mm';
+const gauge=(v,p)=>`<div class="g"><i style="width:${v==null?0:Math.min(v/p.max,1)*100}%;background:var(--${st(v,p).c||'line'})"></i><b style="left:${Math.min(p.bad/p.max,1)*100}%"></b><b style="left:${Math.min(p.warn/p.max,1)*100}%"></b></div>`;
+const numv=v=>{const x=parseFloat(String(v==null?'':v).replace(',','.'));return isNaN(x)?null:x};
+const p3on=()=>{const c=$('p3t');return !!(c&&c.checked)};
+const rd=i=>{const e=$('d'+i);if(!e)return null;const v=numv(e.value);if(!p3on())return v;const a=[v,numv(($('pi'+i)||{}).value),numv(($('po'+i)||{}).value)].filter(x=>x!=null);return a.length?Math.min(...a):null};
+const unev=p=>{if(!p)return false;const a=p.filter(x=>x!=null);return a.length>=2&&Math.max(...a)-Math.min(...a)>=2};
+function xToggle(quiet){const w=$('wheels');w.classList.toggle('show3',p3on());w.classList.toggle('showx',$('xt').checked);if(!quiet){cfg.p3=p3on();cfg.xt=$('xt').checked;try{localStorage.setItem(KEY+'-cfg',JSON.stringify(cfg))}catch(e){}upd()}}
+function clrX(){document.querySelectorAll('#wheels [data-x]').forEach(e=>e.value='')}
+function xtr(){const n=nIn(),g=p=>Array.from({length:n},(_,i)=>{const e=$(p+i);return e?e.value.trim():''}),o={};
+  if(p3on()){const P=Array.from({length:n},(_,i)=>[numv($('pi'+i).value),numv($('d'+i).value),numv($('po'+i).value)]);if(P.some(a=>a[0]!=null||a[2]!=null))o.p3=P}
+  const pr=g('pr').map(numv);if(pr.some(v=>v!=null))o.pr=pr;const dt=g('dt');if(dt.some(Boolean))o.dot=dt;const rt=g('rt');if(rt.some(Boolean))o.rt=rt;return o}
+function fillX(r,all){const n=nIn();if(!r||r.d.length!==n)return;
+  if(all&&r.p3){$('p3t').checked=true;r.p3.forEach((p,i)=>{if(!p)return;const a=$('pi'+i),b=$('po'+i),c=$('d'+i);if(a)a.value=p[0]!=null?p[0]:'';if(b)b.value=p[2]!=null?p[2]:'';if(c)c.value=p[1]!=null?p[1]:''})}
+  if(all)(r.pr||[]).forEach((v,i)=>{const e=$('pr'+i);if(e)e.value=v!=null?v:''});
+  (r.dot||[]).forEach((v,i)=>{const e=$('dt'+i);if(e&&!e.value)e.value=v||''});(r.rt||[]).forEach((v,i)=>{const e=$('rt'+i);if(e&&!e.value)e.value=v||''});
+  if(r.dot||r.rt||(all&&r.pr))$('xt').checked=true;xToggle(true);upd()}
+const RT={r:'Regummerat',o:'Omskuret'};
+const prTol=()=>cfg.prTol||10;
+function prDevR(r,i){if(!r.pr||r.pr[i]==null||!r.axp)return null;const W=wheelsOf(r.vt||'pb',r.ax||null,r.d.length),a=W[i]?W[i].a:0,rp=r.axp[a];if(!(rp>0))return null;return Math.abs(r.pr[i]-rp)/rp*100>prTol()?rp:null}
+function prWarn(){if(!heavy())return '';const ap=axpVal(),W=wheelsOf($('vt').value,axles(),nIn()),L=wl(),bad=[];L.forEach((l,i)=>{const e=$('pr'+i),v=e?numv(e.value):null,rp=W[i]?ap[W[i].a]:null;if(v!=null&&rp>0&&Math.abs(v-rp)/rp*100>prTol())bad.push(l+' '+f1(v)+' bar')});return bad.length?'<br><span class="unev">Tryck avviker från rekommenderat: '+esc(bad.join(', '))+'</span>':''}
+function dotTxt(s){s=String(s||'').trim();if(!/^\d{4}$/.test(s))return s;const w=+s.slice(0,2),y=2000+ +s.slice(2),d=new Date(y,0,1+(w-1)*7),a=Math.floor((Date.now()-d)/31557600000);return s.slice(0,2)+'/'+s.slice(2)+(a>=0&&a<40?' ('+a+' år)':'')}
+function detRows(r){const L=labelsOf(r),out=[];L.forEach((l,i)=>{const p=r.p3&&r.p3[i],has3=p&&(p[0]!=null||p[2]!=null),pr=r.pr&&r.pr[i],dt=r.dot&&r.dot[i],rt=r.rt&&r.rt[i];if(!has3&&pr==null&&!dt&&!rt)return;const dv=prDevR(r,i);
+  out.push([l,has3?p.map(v=>v==null?'–':f1(v)).join(' / '):'',pr!=null?f1(pr)+' bar':'',dt?dotTxt(dt):'',RT[rt]||'',[has3&&unev(p)?'Ojämnt slitage':'',dv?'Tryck avviker (rek. '+f1(dv)+' bar)':''].filter(Boolean).join(', ')])});return out}
+function detHtml(r){const D=detRows(r);if(!D.length)return '';return `<h3>Däckdetaljer</h3><table class="tb"><tr><th>Däck</th><th>Inner / mitt / ytter</th><th>Tryck</th><th>DOT</th><th>Utförande</th><th></th></tr>${D.map(a=>`<tr>${a.map((v,k)=>`<td${k===5&&v?' class="unev"':''}>${esc(v)}</td>`).join('')}</tr>`).join('')}</table>`}
+const nIn=()=>wIn().length;
+function curP(){return{date:$('date').value,vt:$('vt').value,season:$('season').value,nd:parseFloat($('nd').value)||0,bp:parseFloat($('bp').value)||0,wp:parseFloat($('wp').value)||0}}
+const heavy=()=>['tl','sl','ar'].includes($('vt').value);
+const AXV=(vt,ax)=>vt==='tl'||vt==='sl'||(vt==='ar'&&!!(ax&&ax.length));
+const axles=()=>[...document.querySelectorAll('#axd .axl input:not(.axwc)')].map(e=>e.checked);
+function buildAx(){
+  const n=Math.max(1,Math.min(8,parseInt($('na').value)||0)),old=axles(),od=[...document.querySelectorAll('.adim')].map(e=>e.value),ow=[...document.querySelectorAll('.axwc')].map(e=>e.value),op=[...document.querySelectorAll('.axp')].map(e=>e.value);
+  $('axd').innerHTML='<label>Dubbelmontage på axel</label><div class="axl">'+Array.from({length:n},(_,i)=>`<label><input type="checkbox" ${old[i]?'checked':''} onchange="buildW()">Axel ${i+1}</label>`).join('')+'</div><div id="axwb"'+(WK.includes($('kat').value)?'':' hidden')+'><label style="margin-top:10px">Vinterdäck (M+S, 3PMSF eller POR)</label><div class="fields">'+Array.from({length:n},(_,i)=>`<div><label for="aw${i}">Axel ${i+1}</label><select id="aw${i}" class="axwc" onchange="upd()"><option value="">Ej kontrollerat</option><option value="j"${ow[i]==='j'?' selected':''}>Ja</option><option value="n"${ow[i]==='n'?' selected':''}>Nej</option></select></div>`).join('')+'</div></div><label style="margin-top:10px">Rekommenderat tryck per axel (bar, valfritt)</label><div class="fields">'+Array.from({length:n},(_,i)=>`<div><label for="ap${i}">Axel ${i+1}</label><input id="ap${i}" class="axp" inputmode="decimal" autocomplete="off" value="${esc(op[i]||'')}" oninput="upd()"></div>`).join('')+'</div><label style="margin-top:10px">Dimension per axel</label><div class="fields">'+Array.from({length:n},(_,i)=>`<div><label for="ad${i}">Axel ${i+1}${i===0&&n>1?' (fram)':i===n-1&&n>1?' (bak)':''}</label><input id="ad${i}" class="adim" list="dimlist" onchange="this.value=normDim(this.value)" placeholder="315/80R22.5" autocomplete="off" value="${esc(od[i]||'')}"></div>`).join('')+'</div>';
+  buildW();
+}
+function wl(){
+  if(heavy()){const L=[];axles().forEach((dual,i)=>{const t='Axel '+(i+1)+' ';if(dual)L.push(t+'vänster ute',t+'höger ute',t+'vänster inne',t+'höger inne');else L.push(t+'vänster',t+'höger')});return L}
+  const n=Math.max(1,Math.min(24,parseInt($('nt').value)||0)),pb=$('vt').value==='pb'&&n===4;
+  return Array.from({length:n},(_,i)=>pb?POS[i]:'Axel '+(Math.floor(i/2)+1)+' '+(i%2?'höger':'vänster'));
+}
+function buildW(){
+  const L=wl(),old={},nwOld={},brOld={},XO={};bIn().forEach(e=>brOld[e.dataset.l]=e.value);document.querySelectorAll('#wheels input[type=checkbox]').forEach(e=>nwOld[e.dataset.l]=e.checked);wIn().forEach(e=>old[e.dataset.l]=e.value);
+  document.querySelectorAll('#wheels [data-x]').forEach(e=>XO[e.dataset.x+'|'+e.dataset.l]=e.value);const xv=(k,l)=>esc(XO[k+'|'+l]||'');
+  $('wheels').innerHTML=L.map((l,i)=>`<div><label for="d${i}">${l}<span class="m3">, mitt</span> (mm)</label><input id="d${i}" class="dep" data-l="${l}" type="number" step="0.1" min="0" max="120" inputmode="decimal" value="${esc(old[l]||'')}" oninput="upd()" onfocus="hl(${i})" onkeydown="wKey(event,this.id)"><div id="g${i}"></div>`
+    +`<div class="px"><input id="pi${i}" data-x="pi" data-l="${l}" inputmode="decimal" placeholder="Inner (mm)" aria-label="${l} inner (mm)" autocomplete="off" value="${xv('pi',l)}" oninput="upd()" onfocus="hl(${i})" onkeydown="wKey(event,this.id)"><input id="po${i}" data-x="po" data-l="${l}" inputmode="decimal" placeholder="Ytter (mm)" aria-label="${l} ytter (mm)" autocomplete="off" value="${xv('po',l)}" oninput="upd()" onfocus="hl(${i})" onkeydown="wKey(event,this.id)"></div>`
+    +`<input class="bw" data-b="1" id="b${i}" data-l="${l}" list="brandlist" placeholder="Fabrikat" autocomplete="off" value="${esc(brOld[l]||'')}">`
+    +`<div class="xx"><input id="pr${i}" data-x="pr" data-l="${l}" inputmode="decimal" placeholder="Tryck (bar)" aria-label="${l} tryck (bar)" autocomplete="off" value="${xv('pr',l)}"><input id="dt${i}" data-x="dt" data-l="${l}" inputmode="numeric" maxlength="4" placeholder="DOT (vvåå)" aria-label="${l} DOT vecka och år" autocomplete="off" value="${xv('dt',l)}"><select id="rt${i}" data-x="rt" data-l="${l}" aria-label="${l} däckets utförande"><option value="">Originaldäck</option><option value="r"${XO['rt|'+l]==='r'?' selected':''}>Regummerat</option><option value="o"${XO['rt|'+l]==='o'?' selected':''}>Omskuret</option></select></div>`
+    +`<label class="nw"><input type="checkbox" id="n${i}" data-l="${l}"${nwOld[l]?' checked':''} onchange="upd()">Nytt däck</label></div>`).join('');
+  xToggle(true);preSync();upd();
+}
+function brToggle(){$('wheels').classList.toggle('showb',$('brt').checked)}
+function brAuto(on){$('brt').checked=!!on;brToggle()}
+function brChk(){if($('brt').checked)return;if(bIn().some(e=>e.value.trim()&&e.value.trim()!==$('brand').value.trim())){$('brt').checked=true;brToggle()}}
+function upd(){brChk();const p=prof(curP()),n=nIn(),d=[];for(let i=0;i<n;i++){const v=rd(i);d.push(v);$('g'+i).innerHTML=gauge(v,p)}
+  $('axfig').innerHTML=axleSVG($('vt').value,heavy()?axles():null,d,p,true,null,nwArr(),p3on()?wl().map((l,i)=>unev([numv(($('pi'+i)||{}).value),numv(($('d'+i)||{}).value),numv(($('po'+i)||{}).value)])):null);const m=mn(d);const ue=p3on()?wl().filter((l,i)=>unev([numv(($('pi'+i)||{}).value),numv(($('d'+i)||{}).value),numv(($('po'+i)||{}).value)])):[];$('sum').innerHTML=(m==null?'':`Lägsta däckdjup ${fmt(m)} <span class="pill ${st(m,p).c}">${st(m,p).t}</span>`)+(ue.length?`<br><span class="unev">Ojämnt slitage: ${esc(ue.join(', '))}</span>`:'')+(heavy()&&WK.includes($('kat').value)&&winterD($('date').value)&&[...document.querySelectorAll('.axwc')].some(e=>e.value==='n')?'<br><span class="pill bad">Saknar vinterdäck</span> Krav på vinterdäck 10 november till 10 april.':'')+(heavy()&&WK.includes($('kat').value)&&winterD($('date').value)&&[...document.querySelectorAll('.axwc')].some(e=>!e.value)?'<br><span class="unev">Ange vinterdäck för varje axel i steg 3.</span>':'')+prWarn()}
+let selI=-1;
+function wheelsOf(vt,ax,n){const W=[];if(AXV(vt,ax)){(ax||[]).forEach((dual,a)=>{if(dual)W.push({a,s:-2},{a,s:2},{a,s:-1},{a,s:1});else W.push({a,s:-1,one:1},{a,s:1,one:1})})}else for(let i=0;i<n;i++)W.push({a:Math.floor(i/2),s:i%2?1:-1,one:1});return W}
+function axleSVG(vt,ax,d,p,inter,cf,nw,ue){
+  const W=wheelsOf(vt,ax,d.length),na=AXV(vt,ax)?(ax||[]).length:Math.ceil(d.length/2),H=50+na*54;
+  let s=`<svg viewBox='-72 0 144 ${H}' class='axsvg' role='img' aria-label='Hjulplacering'><text x='-70' y='12' class='at lb'>Vänster</text><text x='70' y='12' class='at lb' text-anchor='end'>Höger</text>`;
+  s+=vt==='sl'?`<text x='0' y='28' class='at lb' text-anchor='middle'>Fram</text>`:`<rect x='-24' y='4' width='48' height='34' rx='6' style='fill:var(--mute)'/><text x='0' y='21' class='at lb wt' text-anchor='middle' dominant-baseline='central'>Fram</text>`;
+  s+=`<rect x='-5' y='38' width='10' height='${H-46}' style='fill:var(--line)'/>`;
+  for(let a=0;a<na;a++)s+=`<rect x='-62' y='${66+a*54}' width='124' height='5' style='fill:var(--mute)'/>`;
+  W.forEach((w,i)=>{const cx=w.one?w.s*52:Math.sign(w.s)*(Math.abs(w.s)===2?58:36),cy=68+w.a*54,v=d[i],c=st(v,p).c;
+    s+=`<g${inter?` onclick='pick(${i})' style='cursor:pointer'`:''}><rect class='wh${inter&&i===selI?' sel':''}' ${inter?`id='wh${i}'`:''} x='${cx-10}' y='${cy-21}' width='20' height='42' rx='4' style='fill:var(--${c||'line'});${cf&&cf[i]?'opacity:.5':''}'/>${v==null?'':`<text x='${cx}' y='${cy}' transform='rotate(-90 ${cx} ${cy})' class='wn' text-anchor='middle' dominant-baseline='central'>${v.toFixed(1).replace('.',',')}</text>`}${nw&&nw[i]?`<text x='${cx}' y='${cy-25}' class='at lb' text-anchor='middle' style='fill:var(--ok)'>NY</text>`:''}${ue&&ue[i]?`<circle cx='${cx+10}' cy='${cy-20}' r='7' style='fill:var(--warn)'/><text x='${cx+10}' y='${cy-20}' class='at lb' text-anchor='middle' dominant-baseline='central' style='fill:#fff'>!</text>`:''}</g>`});
+  for(let a=0;a<na;a++)s+=`<circle cx='0' cy='${68+a*54}' r='11' style='fill:var(--ink)'/><text x='0' y='${68+a*54}' class='at lb' text-anchor='middle' dominant-baseline='central' style='fill:var(--bg)'>${a+1}</text>`;
+  return s+'</svg>';
+}
+function hl(i){selI=i;document.querySelectorAll('.wh').forEach(e=>e.classList.toggle('sel',e.id==='wh'+i))}
+function pick(i){const e=$('d'+i);if(e){e.focus();e.scrollIntoView({block:'center',behavior:'smooth'})}}
+function prefill(r){
+  ['name','phone','email','brand','dim','veh','driver','note','contact'].forEach(k=>{if(!$(k).value.trim())$(k).value=r[k]||''});
+  $('season').value=r.season||'s';wtShow();if(r.season==='v')$('wt').value=r.wt||'';
+  if(r.plats&&(r.prep||!$('plats').value.trim()))$('plats').value=r.plats;
+  {const lo=lastOdo(r.reg,r.odo);$('odo').placeholder=lo!=null?'senast '+lo.toLocaleString('sv-SE'):''};if(!$('rim').value)$('rim').value=r.rim||'';if(!$('setn').value)$('setn').value=r.setn||'';if(!$('tpms').checked)$('tpms').checked=!!r.tpms;
+  if(!wIn().some(e=>e.value!=='')){
+    $('kat').value=katOf(r);$('vt').value=KB[katOf(r)];$('nt').value=r.d.length;showHeavy();
+    if(r.ax){$('na').value=r.ax.length;buildAx();document.querySelectorAll('#axd .axl input:not(.axwc)').forEach((e,i)=>e.checked=!!r.ax[i]);document.querySelectorAll('.adim').forEach((e,i)=>e.value=(r.axd||[])[i]||'');setAxw(r)}
+    $('nd').value=r.nd||'';if(r.bp!=null){$('bp').value=r.bp;$('wp').value=r.wp}
+    $('arx').hidden=$('vt').value!=='ar';$('rule').textContent=NOTE[$('vt').value];buildW();
+  }
+  {const bi=bIn();if(r.bd&&r.bd.length===bi.length)bi.forEach((e,i)=>{if(!e.value)e.value=r.bd[i]||''})}
+  const ins=wIn();
+  if(ins.length===r.d.length)ins.forEach((e,i)=>{if(r.d[i]!=null)e.placeholder='förra '+r.d[i].toFixed(1).replace('.',',')});
+  fillX(r,false);
+}
+function lookupReg(pre){
+  $('reg').value=normReg($('reg').value);const reg=$('reg').value.trim().toUpperCase(),m=$('scanmsg');if(reg.length<2)return;
+  const l=recs.filter(r=>(r.reg||'').trim().toUpperCase()===reg).sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+  if(!l.length){if(pre)m.textContent=pre;return}
+  prefill(l[0]);m.textContent=(pre||'')+(l[0].prep?'Fordonet är förberett ('+l[0].date+'). Uppgifterna är ifyllda.':'Hittade tidigare mätning från '+l[0].date+'. Uppgifterna är ifyllda. Lägsta då var '+fmt(mn(l[0].d))+'.');
+}
+function fillNames(){const s=new Set(recs.map(r=>r.name).filter(Boolean));$('namelist').innerHTML=[...s].sort((a,b)=>a.localeCompare(b,'sv')).map(v=>`<option value="${esc(v)}">`).join('');fillRegs();fillLists()}
+function fillRegs(){const n=$('name').value.trim().toLowerCase();let l=recs.filter(r=>r.reg);const m=n?l.filter(r=>(r.name||'').toLowerCase()===n):[];if(m.length)l=m;const s=new Set(l.map(r=>r.reg.trim().toUpperCase()));$('reglist').innerHTML=[...s].sort().map(v=>`<option value="${esc(v)}">`).join('')}
+function lookupName(){
+  fillRegs();const v=$('name').value.trim();if(!v)return;
+  if($('reg').value.trim())return;
+  const l=recs.filter(r=>(r.name||'').toLowerCase()===v.toLowerCase()).sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+  if(l.length&&l[0].reg){$('reg').value=l[0].reg;lookupReg()}
+}
+function fillLists(){const o=a=>[...new Set(a.map(v=>(v||'').trim()).filter(Boolean))].sort((x,y)=>x.localeCompare(y,'sv')).map(v=>`<option value="${esc(v)}">`).join('');
+  $('brandlist').innerHTML=o(recs.map(r=>r.brand));$('dimlist').innerHTML=o(recs.flatMap(r=>[r.dim,...(r.axd||[])]));$('vehlist').innerHTML=o(recs.map(r=>r.veh));$('loclist').innerHTML=o(recs.map(r=>r.loc));$('setlist').innerHTML=o(recs.map(r=>r.setn));$('platslist').innerHTML=o(recs.map(r=>r.plats))}
+const REPCSS=':root{--ink:#111;--mute:#555;--line:#bbb;--bg:#fff;--panel:#fff;--ok:#2b7a4b;--warn:#b87800;--bad:#b3321f}body{font:15px/1.4 system-ui,sans-serif;color:#111;margin:0}.sheet{padding:18mm 16mm;break-after:page;max-width:180mm;margin:0 auto}.row{display:flex;justify-content:space-between;align-items:center}h2{font-size:26px;margin:0}h3{font-size:16px;margin:14px 0 4px}.sub,.note{color:#555;font-size:13px}.pill{padding:2px 10px;border-radius:99px;font-weight:600;font-size:13px}.pill.ok{background:#dcefe3;color:#2b7a4b}.pill.warn{background:#f7e8c4;color:#b87800}.pill.bad{background:#f5d9d3;color:#b3321f}.kv{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin:12px 0}.tb{width:100%;border-collapse:collapse;margin:8px 0}.tb th,.tb td{text-align:left;padding:5px 8px;border-bottom:1px solid #ccc}.axsvg{display:block;margin:8px auto;width:200px;max-height:380px}.at{font:600 9px system-ui,sans-serif;fill:#555}.wt{fill:#fff}';
+function saveFile(blob,fn){const a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=fn;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000)}
+const DL={save:async o=>saveFile(o.data,o.filename)};
+const todayS=()=>new Date().toLocaleDateString('sv-SE');
+function labelsOf(r){const vt=r.vt||'pb',n=r.d.length;
+  if(AXV(vt,r.ax)){const L=[];(r.ax||[]).forEach((dual,i)=>{const t='Axel '+(i+1)+' ';if(dual)L.push(t+'vänster ute',t+'höger ute',t+'vänster inne',t+'höger inne');else L.push(t+'vänster',t+'höger')});return L}
+  return Array.from({length:n},(_,i)=>vt==='pb'&&n===4?POS[i]:'Axel '+(Math.floor(i/2)+1)+' '+(i%2?'höger':'vänster'))}
+function sheetHtml(x,i,file){
+  const r=x.last,s=sOf(x),L=labelsOf(r),vt=r.vt||'pb';const wo=wearOf(x);
+  const dims=r.axd&&r.axd.some(Boolean)?r.axd.map((v,k)=>'Axel '+(k+1)+': '+(v||'–')).join(', '):r.dim;
+  const kv=[['Kund',r.name],['Kontaktperson',r.contact||''],['Telefon',r.phone],['E-post',r.email],['Mätt',r.date],['Mätplats',r.plats||''],['Anteckning',r.note||''],['Vinterdäck',wTxt(r)],['Fordonstyp',KN(r)],['Däcktyp',stName(r)],['Fälg',r.rim==='al'?'Aluminiumfälg':r.rim==='pl'?'Plåtfälg':r.rim==='lo'?'Lösa däck':''],['TPMS',r.tpms?'Ja':''],['Mätarställning',r.odo!=null?r.odo.toLocaleString('sv-SE')+(vt==='ar'?' tim':' km'):''],['Lagerplats',r.loc||''],['Fabrikat',r.brand],['Dimension',dims]].filter(a=>a[1]);
+  const hist=x.l.slice(1,7);
+  return `<article class="sheet"${file?'':` id="sh${i}"`}><div class="row"><div><h2>${esc(r.reg||r.name||'Fordon')}</h2><div class="sub">${esc([r.veh,stName(r)].filter(Boolean).join(', '))}</div></div><span class="pill ${s.c}">${s.t}</span></div>`
+  +`<div class="kv">${kv.map(([k,v])=>`<div><span class="sub">${k}</span><br><b>${esc(v)}</b></div>`).join('')}</div>`
+  +axleSVG(vt,r.ax||null,r.d,x.p,false,r.cf,r.nw,r.p3?r.p3.map(unev):null)
+  +`<table class="tb"><tr><th>Däck</th>${r.bd&&r.bd.some(Boolean)?'<th>Fabrikat</th>':''}<th>Djup</th><th>Slitet</th><th>${vt==='ar'?'Tim kvar':'Km kvar'}</th><th>Status</th></tr>${L.map((l,k)=>`<tr><td>${esc(l)}${r.nw&&r.nw[k]?' <span class="sub">(nytt däck)</span>':''}</td>${r.bd&&r.bd.some(Boolean)?`<td>${esc(r.bd[k]||'')}</td>`:''}<td>${fmt(r.d[k])}${r.cf&&r.cf[k]?` <span class="sub">(från ${r.cf[k]})</span>`:''}</td><td>${wearCell(x,k)}${(()=>{const w=wearFrom(x,k);return w&&w.date!==(x.l[1]||{}).date?` <span class="sub">(sedan ${w.date})</span>`:''})()}</td><td>${milLeft(x,k,wo)}</td><td>${st(r.d[k],x.p).t}</td></tr>`).join('')}</table>`
+  +detHtml(r)+photosHtml(r)+wearSum(x)+(hist.length?`<h3>Tidigare mätningar</h3><table class="tb"><tr><th>Datum</th><th>Mätarst.</th><th>Lägsta djup</th><th>Status</th>${file?'':'<th class="noprint"></th>'}</tr>${hist.map(h=>{const m=mn(h.d);return `<tr><td>${esc(h.date)}${h.ev==='on'&&isCopy(h)?' <span class="sub">monterades</span>':''}</td><td>${h.odo!=null?h.odo.toLocaleString('sv-SE'):'–'}</td><td>${fmt(m)}</td><td>${st(m,prof(h)).t}</td>${file?'':`<td class="noprint"><button class="ghost" onclick="openOld(${h.id})">Öppna</button></td>`}</tr>`}).join('')}</table>`:'')
+  +`<p class="note">Gränser: Byt nu under ${fmt(x.p.bad)}, byt snart under ${fmt(x.p.warn)}. Slitet är millimeter sedan förra mätningen av däcket. Sträcka kvar uppskattas för varje däck till gränsen för byt nu, om slitaget fortsätter i samma takt. ca betyder att däcket saknar egen slitagehistorik och att uppsättningens snitt används. Rapport skapad ${todayS()}.${r.cf?' Blekta hjul är värden från en tidigare mätning.':''}</p>`
+  +(file?'':`<div class="noprint" style="display:flex;gap:8px;flex-wrap:wrap"><button class="ghost" onclick="editRec(${x.last.id})">Redigera mätning</button><button class="ghost" onclick="printOne(${i})">Skriv ut blad</button><button class="ghost" onclick="saveRep([${i}])">Spara blad som PDF</button></div>`)+'</article>';
+}
+let repG=[];
+const cn=x=>(x.last.name||'').trim()||'Utan namn';
+function renderRap(){
+  const q=$('gq').value.trim().toLowerCase();
+  repG=groups().filter(x=>!x.last.prep).filter(x=>!q||(x.last.reg+' '+x.last.name+' '+(x.last.veh||'')+' '+(x.last.plats||'')).toLowerCase().includes(q)).sort((a,b)=>cn(a).toLowerCase().localeCompare(cn(b).toLowerCase(),'sv')||((a.last.plats||'').trim()||'~').localeCompare((b.last.plats||'').trim()||'~','sv')||(a.last.reg||'').localeCompare(b.last.reg||'','sv',{numeric:true}));
+  const K=[];repG.forEach((x,i)=>{const n=cn(x),o=(x.last.plats||'').trim()||'Utan plats';let k=K.find(z=>z.n.toLowerCase()===n.toLowerCase());if(!k){k={n,ix:[],P:[]};K.push(k)}k.ix.push(i);let p=k.P.find(z=>z.o===o);if(!p){p={o,ix:[]};k.P.push(p)}p.ix.push(i)});
+  $('rep').innerHTML=repG.length?K.map(k=>`<details class="fold"${q||K.length===1?' open':''}><summary><span><b>${esc(k.n)}</b><span class="sub" style="margin-left:10px">${k.ix.length} fordon</span></span></summary><div class="noprint fbtn"><button class="ghost" onclick="printSet([${k.ix.length>1?`'ks${k.ix[0]}',`:''}${k.ix}])">Skriv ut kundens blad</button><button class="ghost" onclick='saveSum([${k.ix}],${esc(JSON.stringify(k.n))})'>Sammanställning som PDF</button><button class="ghost" onclick="saveRep([${k.ix}])">Spara kundens blad som PDF</button><button class="ghost" onclick="exportXlsx(${esc(JSON.stringify(k.n))})">Exportera kundens Excel</button></div>${k.ix.length>1?sumHtml(k.ix,k.n):''}`
+    +k.P.map(p=>`<details class="fold amp"${q||k.P.length===1?' open':''} style="margin:8px 10px"><summary><span>${esc(p.o)}<span class="sub" style="margin-left:10px">${p.ix.length} fordon</span></span></summary><div class="noprint fbtn"><button class="ghost" onclick="printSet([${p.ix}])">Skriv ut platsens blad</button><button class="ghost" onclick="saveRep([${p.ix}])">Spara platsens blad som PDF</button></div>${p.ix.map(i=>sheetHtml(repG[i],i,false)).join('')}</details>`).join('')+'</details>').join(''):'<p class="empty">Inga fordon att visa. Spara en mätning först.</p>';
+}
+function sumRows(L){return L.map(x=>{const r=x.last,s=sOf(x),Lb=labelsOf(r),ch=r.d.map((v,i)=>({v,i,c:st(v,x.p).c})).filter(o=>o.c==='bad'||o.c==='warn').map(o=>Lb[o.i]+' '+f1(o.v)+' mm');
+  return {reg:r.reg||r.name||'',veh:r.veh||'',typ:KN(r),date:r.prep?'Ej mätt':r.date,min:fmt(x.min),s,ch:ch.join(', '),w:winterLack(r,todayS())?wTxt(r):'',ue:r.p3&&r.p3.some(unev)}})}
+function sumMail(L,name,R){const c=L.map(x=>x.last).find(r=>r.email)||{},ct=(L.map(x=>x.last).find(r=>r.contact)||{}).contact||'';
+  const body='Hej'+(ct?' '+ct:'')+'!\n\nHär är resultatet av däckkontrollen för '+name+', '+todayS()+'.\n\n'+R.map(o=>o.reg+': '+o.s.t+(o.ch?' – byt '+o.ch:'')+(o.w?' – vinterdäck '+o.w.toLowerCase():'')).join('\n')+'\n\nHör av dig om du vill boka byte.';
+  return {to:c.email||'',ct,href:'mailto:'+encodeURIComponent(c.email||'')+'?subject='+encodeURIComponent('Däckkontroll '+name+' '+todayS())+'&body='+encodeURIComponent(body)}}
+function sumHtml(ix,name){const L=ix.map(i=>repG[i]),R=sumRows(L),nb=R.filter(o=>o.s.c==='bad').length,nw=R.filter(o=>o.s.c==='warn').length,ml=sumMail(L,name,R);
+  return `<article class="sheet" id="ks${ix[0]}"><div class="row"><div><h2>Sammanställning</h2><div class="sub">${esc(name)} · ${L.length} fordon · ${todayS()}</div>${ml.ct||ml.to?`<div class="sub">${esc([ml.ct,ml.to].filter(Boolean).join(', '))}</div>`:''}</div><span class="pill ${nb?'bad':nw?'warn':'ok'}">${nb} byt nu, ${nw} byt snart</span></div>`
+  +`<table class="tb"><tr><th>Fordon</th><th>Mätt</th><th>Lägsta</th><th>Status</th><th>Däck att byta</th></tr>${R.map(o=>`<tr><td><b>${esc(o.reg)}</b><br><span class="sub">${esc([o.typ,o.veh].filter(Boolean).join(', '))}</span></td><td>${esc(o.date)}</td><td>${o.min}</td><td><span class="pill ${o.s.c}">${o.s.t}</span></td><td>${esc(o.ch||'–')}${o.w?'<br><span class="sub">Vinterdäck '+esc(o.w.toLowerCase())+'</span>':''}${o.ue?'<br><span class="sub">Ojämnt slitage</span>':''}</td></tr>`).join('')}</table>`
+  +`<p class="note">Röd: byt nu. Gul: byt snart. Status och gränser gäller i dag, ${todayS()}.</p><div class="noprint" style="display:flex;gap:8px;flex-wrap:wrap"><button class="ghost" onclick="printSet(['ks${ix[0]}'])">Skriv ut sammanställning</button>${ml.to?`<a class="ghost" style="display:inline-block;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink);font-weight:600;text-decoration:none" href="${esc(ml.href)}">Skicka e-post till ${esc(ml.to)}</a><button class="ghost" onclick="cpMail(${esc(JSON.stringify(ix))},${esc(JSON.stringify(name))})">Kopiera e-posttext</button>`:''}<button class="ghost" onclick='saveSum([${ix}],${esc(JSON.stringify(name))})'>Spara som PDF</button></div></article>`}
+function pdfSum(doc,L,name){const R=sumRows(L),gray=()=>doc.setTextColor(95,105,115),dark=()=>doc.setTextColor(27,37,48);let y=22;
+  const nb=R.filter(o=>o.s.c==='bad').length,nw=R.filter(o=>o.s.c==='warn').length;
+  dark();doc.setFont('helvetica','bold');doc.setFontSize(20);doc.text(T('Sammanställning'),15,y);doc.setFont('helvetica','normal');doc.setFontSize(10);gray();doc.text(T(name+' - '+L.length+' fordon - '+todayS()+' - '+nb+' byt nu, '+nw+' byt snart'),15,y+7);y+=18;
+  const X=[15,48,72,92,118],head=()=>{doc.setFont('helvetica','bold');doc.setFontSize(9);gray();['Fordon','Mätt','Lägsta','Status','Däck att byta'].forEach((t,i)=>doc.text(T(t),X[i],y));doc.setDrawColor(190,198,205);doc.line(15,y+1.8,195,y+1.8);y+=6};head();
+  R.forEach(o=>{const c1=doc.splitTextToSize(T([o.typ,o.veh].filter(Boolean).join(', ')),31),c5=doc.splitTextToSize(T((o.ch||'-')+(o.w?'. Vinterdäck '+o.w.toLowerCase():'')+(o.ue?'. Ojämnt slitage':'')),76),h=Math.max(1+c1.length,c5.length)*4.3+2.5;
+    if(y+h>285){doc.addPage();y=20;head()}
+    doc.setFontSize(9.5);doc.setFont('helvetica','bold');dark();doc.text(T(o.reg),X[0],y);doc.setFont('helvetica','normal');doc.setFontSize(8.5);gray();doc.text(c1,X[0],y+4.3);
+    doc.setFontSize(9.5);dark();doc.text(T(o.date),X[1],y);doc.text(T(o.min),X[2],y);doc.setFont('helvetica','bold');doc.setTextColor(...RGB[o.s.c]);doc.text(T(o.s.t),X[3],y);
+    doc.setFont('helvetica','normal');dark();doc.setFontSize(9);doc.text(c5,X[4],y);doc.setDrawColor(228,232,235);doc.line(15,y+h-3.5,195,y+h-3.5);y+=h});
+  doc.setFontSize(8);gray();doc.text(T('Röd: byt nu. Gul: byt snart. Status och gränser gäller '+todayS()+'.'),15,Math.min(y+4,290))}
+async function cpMail(ix,name){const L=ix.map(i=>repG[i]),ml=sumMail(L,name,sumRows(L));try{await navigator.clipboard.writeText(decodeURIComponent(ml.href.split('&body=')[1]));toast('Texten är kopierad')}catch(e){toast('Det gick inte att kopiera')}}
+async function saveSum(ix,name){const m={set textContent(v){const e=$('repmsg');if(e)e.textContent=v;toast(v)}};
+  try{if(!(window.jspdf&&window.jspdf.jsPDF)){m.textContent='PDF-funktionen kunde inte laddas. Prova Skriv ut i stället.';return}
+    const d=DL;if(!d){m.textContent='Det går inte att spara filer i den här vyn. Använd Skriv ut.';return}
+    const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4'});pdfSum(doc,ix.map(i=>repG[i]).filter(Boolean),name);
+    await d.save({filename:'sammanstallning-'+String(name).replace(/[^A-Za-z0-9ÅÄÖåäö]+/g,'-')+'-'+todayS()+'.pdf',data:doc.output('blob')});m.textContent='Sammanställningen är sparad.'}
+  catch(e){m.textContent=e&&e.code==='declined'?'Sparandet avbröts.':'Det gick inte att spara PDF-filen.'}}
+function clearOne(){document.body.classList.remove('one');document.querySelectorAll('.sheet.on').forEach(e=>e.classList.remove('on'))}
+function printAll(){clearOne();const c=[];document.querySelectorAll('#rep details,#hlist details').forEach(d=>{if(!d.open){d.open=true;c.push(d)}});const back=()=>c.forEach(d=>d.open=false);addEventListener('afterprint',back,{once:true});try{window.print()}catch(e){back()}}
+function printSet(a){clearOne();document.body.classList.add('one');const op=[];a.forEach(i=>{const e=$(typeof i==='string'?i:'sh'+i);if(!e)return;e.classList.add('on');let d=e.parentNode;while(d&&d.id!=='rep'&&d.id!=='hlist'){if(d.tagName==='DETAILS'&&!d.open){d.open=true;op.push(d)}d=d.parentNode}});const back=()=>{clearOne();op.forEach(d=>d.open=false)};addEventListener('afterprint',back,{once:true});try{window.print()}catch(e){back()}}
+const printOne=i=>printSet([i]);
+const T=v=>String(v==null?'':v).replace(/[\u00a0\u202f\u2009]/g,' ').replace(/[\u2013\u2014]/g,'-').replace(/[\u2018\u2019]/g,"'").replace(/[^\x20-\x7e\xa0-\xff]/g,'');
+const RGB={ok:[43,122,75],warn:[184,120,0],bad:[179,50,31],'':[190,198,205]},BG={ok:[220,239,227],warn:[247,232,196],bad:[245,217,211],'':[235,238,240]};
+const mixW=(c,t)=>c.map(v=>Math.round(v+(255-v)*t));
+function wearRows(x){
+  const r=x.last,pr=x.l[1],ar=(r.vt||'pb')==='ar',rows=[];
+  if(ar){if(pr&&r.odo!=null&&pr.odo!=null&&r.odo>pr.odo)rows.push(['Körsträcka sedan förra mätningen av uppsättningen',(r.odo-pr.odo).toLocaleString('sv-SE')+' tim (från '+pr.date+')'])}else rows.push(...rollRows(x));
+  {const wr=wornRow(x);if(wr)rows.push(wr)}
+  const w=wearOf(x);
+  if(w){rows.push(['Slitage',f1(w.rate)+(ar?' mm per 100 tim':' mm per 10 000 km')]);if(w.rem!=null)rows.push(['Beräknad sträcka kvar till byt nu',w.rem===0?'Byt nu':ar?Math.round(w.rem).toLocaleString('sv-SE')+' tim':(Math.round(w.rem/100)*100).toLocaleString('sv-SE')+' km'])}
+  return rows}
+function pdfAxle(doc,x0,y0,k,vt,ax,d,p,cf,nw){
+  const W=wheelsOf(vt,ax,d.length),na=AXV(vt,ax)?(ax||[]).length:Math.ceil(d.length/2),H=50+na*54,ox=x0+72*k,X=u=>ox+u*k,Y=u=>y0+u*k,fs=Math.max(6,12*k/0.3528),fw=Math.max(7,15*k/0.3528);
+  doc.setFont('helvetica','bold');doc.setFontSize(fs*0.8);doc.setTextColor(110,120,130);
+  doc.text('Vänster',X(-70),Y(12));doc.text('Höger',X(70),Y(12),{align:'right'});
+  if(vt==='sl'){doc.text('Fram',X(0),Y(28),{align:'center'})}
+  else{doc.setFillColor(110,120,130);doc.roundedRect(X(-24),Y(4),48*k,34*k,6*k,6*k,'F');doc.setTextColor(255,255,255);doc.text('Fram',X(0),Y(23),{align:'center'})}
+  doc.setFillColor(205,213,219);doc.rect(X(-5),Y(38),10*k,(H-46)*k,'F');
+  doc.setFillColor(110,120,130);for(let a=0;a<na;a++)doc.rect(X(-62),Y(66+a*54),124*k,5*k,'F');
+  W.forEach((w,i)=>{const cx=w.one?w.s*52:Math.sign(w.s)*(Math.abs(w.s)===2?58:36),cy=68+w.a*54,v=d[i],c=st(v,p).c,old=cf&&cf[i];
+    doc.setFillColor(...(old?mixW(RGB[c],.5):RGB[c]));doc.roundedRect(X(cx-10),Y(cy-21),20*k,42*k,4*k,4*k,'F');
+    if(v!=null){const t=T(v.toFixed(1).replace('.',',')),tw=doc.getTextWidth(t);doc.setTextColor(...(old?[40,40,40]:[255,255,255]));doc.setFontSize(fw);const tw2=doc.getTextWidth(t);doc.text(t,X(cx)+fw*0.3528*0.35,Y(cy)+tw2/2,{angle:90});doc.setFontSize(fs*0.8)}
+    if(nw&&nw[i]){doc.setTextColor(...RGB.ok);doc.text('NY',X(cx),Y(cy-25),{align:'center'})}});
+  for(let a=0;a<na;a++){const cy=68+a*54;doc.setFillColor(27,37,48);doc.circle(X(0),Y(cy),11*k,'F');doc.setTextColor(255,255,255);doc.text(String(a+1),X(0),Y(cy)+fs*0.3528*0.33,{align:'center'})}
+  return H*k}
+function pdfSheet(doc,x){
+  const r=x.last,s=sOf(x),L=labelsOf(r),vt=r.vt||'pb',wo=wearOf(x),gray=()=>doc.setTextColor(95,105,115),dark=()=>doc.setTextColor(27,37,48);
+  const dims=r.axd&&r.axd.some(Boolean)?r.axd.map((v,k)=>'Axel '+(k+1)+': '+(v||'-')).join(', '):r.dim;
+  const kv=[['Kund',r.name],['Kontaktperson',r.contact||''],['Telefon',r.phone],['E-post',r.email],['Mätt',r.date],['Mätplats',r.plats||''],['Anteckning',r.note||''],['Vinterdäck',wTxt(r)],['Fordonstyp',KN(r)],['Däcktyp',stName(r)],['Fälg',r.rim==='al'?'Aluminiumfälg':r.rim==='pl'?'Plåtfälg':r.rim==='lo'?'Lösa däck':''],['TPMS',r.tpms?'Ja':''],['Mätarställning',r.odo!=null?r.odo.toLocaleString('sv-SE')+(vt==='ar'?' tim':' km'):''],['Lagerplats',r.loc||''],['Fabrikat',r.brand],['Dimension',dims]].filter(a=>a[1]);
+  let y=0;
+  dark();doc.setFont('helvetica','bold');doc.setFontSize(22);doc.text(T(r.reg||r.name||'Fordon'),15,22);
+  doc.setFont('helvetica','normal');doc.setFontSize(10);gray();doc.text(T([r.veh,stName(r)].filter(Boolean).join(', ')),15,29);
+  doc.setFont('helvetica','bold');doc.setFontSize(10);const sw=doc.getTextWidth(T(s.t))+10;doc.setFillColor(...BG[s.c]);doc.roundedRect(195-sw,14,sw,8,4,4,'F');doc.setTextColor(...RGB[s.c]);doc.text(T(s.t),195-sw/2,19.3,{align:'center'});
+  y=40;
+  kv.forEach(([k,v],i)=>{const cx=i%2?110:15,cy=y+Math.floor(i/2)*13;doc.setFont('helvetica','normal');doc.setFontSize(8);gray();doc.text(T(k),cx,cy);doc.setFont('helvetica','bold');doc.setFontSize(11);dark();doc.text(doc.splitTextToSize(T(v),82)[0],cx,cy+5)});
+  y+=Math.ceil(kv.length/2)*13+4;
+  const na=AXV(vt,r.ax)?(r.ax||[]).length:Math.ceil(r.d.length/2),H=50+na*54,hb=r.bd&&r.bd.some(Boolean),C=hb?{b:45,d:72,w:86,m:103,s:122,e:142,x0:145,w0:50}:{d:60,w:78,m:96,s:118,e:136,x0:138,w0:57},k=Math.min(C.w0/144,110/H);
+  const dh=pdfAxle(doc,C.x0,y,k,vt,r.ax||null,r.d,x.p,r.cf,r.nw);
+  let ty=y;doc.setFont('helvetica','bold');doc.setFontSize(9);gray();(hb?[['Däck',15],['Fabrikat',C.b],['Djup',C.d],['Slitet',C.w],[vt==='ar'?'Tim kvar':'Km kvar',C.m],['Status',C.s]]:[['Däck',15],['Djup',C.d],['Slitet',C.w],[vt==='ar'?'Tim kvar':'Km kvar',C.m],['Status',C.s]]).forEach(([t,tx])=>doc.text(T(t),tx,ty));
+  doc.setDrawColor(190,198,205);doc.line(15,ty+1.8,C.e,ty+1.8);ty+=7;
+  let anyCf=false;
+  L.forEach((l,i)=>{const v=r.d[i],c=st(v,x.p),old=r.cf&&r.cf[i];if(old)anyCf=true;
+    doc.setFont('helvetica','normal');doc.setFontSize(9.5);dark();doc.text(doc.splitTextToSize(T(l+(r.nw&&r.nw[i]?' (nytt däck)':'')),hb?29:41)[0],15,ty);if(hb)doc.text(doc.splitTextToSize(T(r.bd[i]||''),25)[0],C.b,ty);
+    doc.text(T(fmt(v)+(old?'*':'')),C.d,ty);doc.text(T(wearCell(x,i)),C.w,ty);doc.text(T(milLeft(x,i,wo)),C.m,ty);
+    doc.setFont('helvetica','bold');doc.setTextColor(...RGB[c.c]);doc.text(T(c.t),C.s,ty);
+    doc.setDrawColor(228,232,235);doc.line(15,ty+1.8,C.e,ty+1.8);ty+=6});
+  let y2=Math.max(ty,y+dh)+8;
+  const need=h=>{if(y2+h>278){doc.addPage();y2=20}};
+  {const D=detRows(r);if(D.length){need(16+D.length*6);doc.setFont('helvetica','bold');doc.setFontSize(13);dark();doc.text(T('Däckdetaljer'),15,y2);y2+=7;
+    const cx=[15,62,100,122,150,172];doc.setFontSize(9);gray();['Däck','Inner/mitt/ytter','Tryck','DOT','Utförande',''].forEach((t,k)=>doc.text(T(t),cx[k],y2));doc.setDrawColor(190,198,205);doc.line(15,y2+1.8,195,y2+1.8);y2+=7;
+    D.forEach(a=>{need(7);doc.setFontSize(9);a.forEach((v,k)=>{if(k===5){doc.setFont('helvetica','bold');doc.setTextColor(...RGB.warn)}else{doc.setFont('helvetica','normal');dark()}doc.text(doc.splitTextToSize(T(v),k===0?45:k===4?22:26)[0],cx[k],y2)});doc.setDrawColor(228,232,235);doc.line(15,y2+1.8,195,y2+1.8);y2+=6});y2+=4}}
+  const wr=wearRows(x);
+  if(wr.length){need(14+Math.ceil(wr.length/2)*13);doc.setFont('helvetica','bold');doc.setFontSize(13);dark();doc.text('Slitage',15,y2);y2+=7;
+    wr.forEach(([kk,v],i)=>{const cx=i%2?110:15,cy=y2+Math.floor(i/2)*13;doc.setFont('helvetica','normal');doc.setFontSize(8);gray();doc.text(doc.splitTextToSize(T(kk),90)[0],cx,cy);doc.setFont('helvetica','bold');doc.setFontSize(11);dark();doc.text(doc.splitTextToSize(T(v),82)[0],cx,cy+5)});
+    y2+=Math.ceil(wr.length/2)*13+4}
+  const hist=x.l.slice(1,7);
+  if(hist.length){need(16+hist.length*6);doc.setFont('helvetica','bold');doc.setFontSize(13);dark();doc.text('Tidigare mätningar',15,y2);y2+=7;
+    doc.setFontSize(9);gray();[['Datum',15],['Mätarst.',50],['Lägsta djup',85],['Status',120]].forEach(([t,tx])=>doc.text(T(t),tx,y2));doc.setDrawColor(190,198,205);doc.line(15,y2+1.8,180,y2+1.8);y2+=7;
+    hist.forEach(h=>{const m=mn(h.d),c=st(m,prof(h));doc.setFont('helvetica','normal');doc.setFontSize(9.5);dark();doc.text(T(h.date),15,y2);doc.text(T(h.odo!=null?h.odo.toLocaleString('sv-SE'):'-'),50,y2);doc.text(T(fmt(m)),85,y2);doc.setFont('helvetica','bold');doc.setTextColor(...RGB[c.c]);doc.text(T(c.t),120,y2);doc.setDrawColor(228,232,235);doc.line(15,y2+1.8,180,y2+1.8);y2+=6});y2+=4}
+  const note='Gränser: Byt nu under '+fmt(x.p.bad)+', byt snart under '+fmt(x.p.warn)+'.'+(anyCf?' * Värdet kommer från en tidigare mätning.':'')+(r.nw&&r.nw.some(Boolean)?' NY markerar nya däck.':'')+' Slitet är millimeter sedan förra mätningen av däcket. Sträcka kvar uppskattas per däck till byt nu-gränsen.'+' Rapport skapad '+todayS()+'.';
+  need(12);doc.setFont('helvetica','normal');doc.setFontSize(8);gray();doc.text(doc.splitTextToSize(T(note),180),15,y2)}
+async function saveRep(idx){
+  const m={set textContent(v){const e=$('repmsg');if(e)e.textContent=v;toast(v)}};
+  try{
+    if(!(window.jspdf&&window.jspdf.jsPDF)){m.textContent='PDF-funktionen kunde inte laddas. Prova Skriv ut i stället.';return}
+    const d=DL;
+    if(!d){m.textContent='Det går inte att spara filer i den här vyn. Använd Skriv ut.';return}
+    const list=(idx||repG.map((_,i)=>i)).map(i=>repG[i]).filter(Boolean);
+    if(!list.length)return;
+    const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
+    list.forEach((x,i)=>{if(i)doc.addPage();pdfSheet(doc,x)});
+    const nm=list.length===1?(list[0].last.reg||'blad').replace(/[^A-Za-z0-9]/g,'')+'-':'';
+    await d.save({filename:'dackrapport-'+nm+todayS()+'.pdf',data:doc.output('blob')});
+    m.textContent='PDF-filen är sparad.';
+  }catch(e){m.textContent=e&&e.code==='declined'?'Sparandet avbröts.':'Det gick inte att spara PDF-filen.'}
+}
+function onCarKm(x,a,b){return Math.max(0,b-a)}
+function rollRows(x){const r=x.last,rows=[];if((r.vt||'pb')==='ar')return rows;const n=v=>Math.round(v).toLocaleString('sv-SE');
+  const pr=x.l[1];if(pr&&r.odo!=null&&pr.odo!=null&&r.odo>pr.odo)rows.push(['Körsträcka sedan förra mätningen',n(r.odo-pr.odo)+' km (från '+pr.date+')']);
+  return rows}
+function wearOf(x){
+  const L=[...x.l].sort((a,b)=>a.date.localeCompare(b.date)||a.id-b.id).filter(r=>r.odo!=null),ar=(x.last.vt||'pb')==='ar';
+  let w=0,wm=0,k=0;const wi=[],ki=[];
+  for(let j=1;j<L.length;j++){const a=L[j-1],b=L[j],dk=ar?b.odo-a.odo:onCarKm(x,a.odo,b.odo);
+    if(b.d.length===a.d.length&&JSON.stringify(a.ax||null)===JSON.stringify(b.ax||null))b.d.forEach((v,i)=>{if((b.nw&&b.nw[i])||rtOf(a,i)!==rtOf(b,i)){wi[i]=0;ki[i]=0}});
+    if(dk<(ar?10:500)||b.d.length!==a.d.length||JSON.stringify(a.ax||null)!==JSON.stringify(b.ax||null))continue;
+    if(ar&&(a.ev==='off'||b.ev==='on'))continue;
+    const ws=[];b.d.forEach((v,i)=>{if(v!=null&&a.d[i]!=null&&!(b.cf&&b.cf[i])&&!(a.cf&&a.cf[i])&&!(b.nw&&b.nw[i])&&rtOf(a,i)===rtOf(b,i)){const s=a.d[i]-v;if(s>=0){ws.push(s);wi[i]=(wi[i]||0)+s;ki[i]=(ki[i]||0)+dk}}});
+    if(!ws.length)continue;w+=ws.reduce((s,v)=>s+v,0)/ws.length;wm+=Math.max(...ws);k+=dk}
+  if(k<=0||w<=0)return null;
+  return{x,ar,avg:w/k,rate:w/k*(ar?100:10000),rem:x.min==null?null:Math.max(0,x.min-x.p.bad)/(wm/k),pw:x.last.d.map((_,i)=>wi[i]>0&&ki[i]>0?wi[i]/ki[i]:null)}}
+const f1=v=>v==null?'–':v.toFixed(1).replace('.',',');
+function milLeft(x,k,w){const r=x.last,v=r.d[k];if(v==null||!w||!w.pw)return '–';const own=w.pw[k]!=null,rt=own?w.pw[k]:w.avg;if(!(rt>0))return '–';const rem=Math.max(0,v-x.p.bad)/rt;if(rem===0)return 'Byt nu';return (own?'':'ca ')+((r.vt||'pb')==='ar'?Math.round(rem).toLocaleString('sv-SE')+' tim':(Math.round(rem/100)*100).toLocaleString('sv-SE')+' km')}
+const isCopy=r=>!!r.cp||(r.ev==='on'&&r.cf&&r.d.every((v,i)=>v==null||r.cf[i]));
+const rtOf=(r,k)=>(r.rt||[])[k]||'';
+function wearFrom(x,k){const r=x.last;if(r.d[k]==null||(r.cf&&r.cf[k])||(r.nw&&r.nw[k]))return null;
+  for(const p of x.l.slice(1)){if(p.d.length!==r.d.length||JSON.stringify(p.ax||null)!==JSON.stringify(r.ax||null))continue;if(rtOf(p,k)!==rtOf(r,k))return null;if(p.d[k]==null||(p.cf&&p.cf[k]))continue;const s=p.d[k]-r.d[k];return s<0?null:{s,date:p.date}}return null}
+function wearCell(x,k){const r=x.last;if(r.nw&&r.nw[k]&&r.d[k]!=null&&!(r.cf&&r.cf[k]))return '0,0 mm';const w=wearFrom(x,k);return w?f1(w.s)+' mm':'–'}
+function wornRow(x){const W=x.last.d.map((_,k)=>wearFrom(x,k)).filter(Boolean);if(!W.length)return null;const avg=W.reduce((a,w)=>a+w.s,0)/W.length,mx=Math.max(...W.map(w=>w.s)),dates=[...new Set(W.map(w=>w.date))].sort();
+  return ['Slitet sedan förra mätningen','medel '+f1(avg)+' mm, mest '+f1(mx)+' mm (från '+dates[dates.length-1]+')']}
+function wearSum(x){
+  const r=x.last,pr=x.l[1],ar=(r.vt||'pb')==='ar',u=ar?'tim':'km',rows=[];
+  if(ar){if(pr&&r.odo!=null&&pr.odo!=null&&r.odo>pr.odo)rows.push(['Körsträcka sedan förra mätningen av uppsättningen',(r.odo-pr.odo).toLocaleString('sv-SE')+' '+u+' (från '+pr.date+')'])}else rows.push(...rollRows(x));
+  {const wr=wornRow(x);if(wr)rows.push(wr)}
+  const w=wearOf(x);
+  if(w){rows.push(['Slitage',f1(w.rate)+(ar?' mm per 100 tim':' mm per 10 000 km')]);if(w.rem!=null)rows.push(['Beräknad sträcka kvar till byt nu',w.rem===0?'Byt nu':ar?Math.round(w.rem).toLocaleString('sv-SE')+' tim':(Math.round(w.rem/100)*100).toLocaleString('sv-SE')+' km'])}
+  return rows.length?`<h3>Slitage</h3><div class="kv">${rows.map(([k,v])=>`<div><span class="sub">${k}</span><br><b>${esc(v)}</b></div>`).join('')}</div>`:''}
+function seasonOpts(){const s=$('season'),v=s.value,pb=$('vt').value==='pb';s.innerHTML='<option value="s">Sommardäck</option><option value="v">Vinterdäck</option>'+(pb&&!(editId&&v==='a')?'':'<option value="a">Året runt</option>');s.value=[...s.options].some(o=>o.value===v)?v:'s';wtShow()}
+const openK=new Set();
+function togK(s){const d=s.parentNode,k=d.dataset.k;if(d.open)openK.delete(k);else openK.add(k)}
+function folders(g,auto){
+  const F=[],M={},rank={bad:0,warn:1,ok:2,'':3};
+  g.forEach(x=>{const k=cn(x).toLowerCase();if(!M[k]){M[k]={k,n:cn(x),l:[]};F.push(M[k])}M[k].l.push(x)});
+  return F.map(f=>{const w=f.l.reduce((a,x)=>rank[sOf(x).c]<rank[a.c]?sOf(x):a,sOf(f.l[0]));
+    return `<details class="fold" data-k="${esc(f.k)}"${auto||openK.has(f.k)?' open':''}><summary onclick="togK(this)"><span><b>${esc(f.n)}</b><span class="sub" style="margin-left:10px">${new Set(f.l.map(x=>x.last.reg||x.last.name)).size} fordon</span><span class="pill ${w.c}">${w.t}</span></span></summary><div class="noprint fbtn" style="padding:8px 0"><button class="ghost" onclick="exportXlsx(${esc(JSON.stringify(f.n))})">Exportera kundens Excel</button></div>${carFolders(f,auto)}</details>`}).join('')}
+function carFolders(f,auto){const C=[],CM={};f.l.forEach(x=>{const k=(x.last.reg||'').trim().toUpperCase()||(x.last.name||'').trim().toLowerCase();if(!CM[k]){CM[k]={k:'kc|'+f.k+'|'+k,l:[]};C.push(CM[k])}CM[k].l.push(x)});
+  const rank={bad:0,warn:1,ok:2,'':3};
+  return C.map(c=>{const r=c.l[0].last,w=c.l.reduce((a,x)=>rank[sOf(x).c]<rank[a.c]?sOf(x):a,sOf(c.l[0]));
+    return `<details class="fold car" data-k="${esc(c.k)}"${auto||openK.has(c.k)?' open':''}><summary onclick="togK(this)"><span><b>${esc(r.reg||r.name||'Fordon')}</b><span class="sub" style="margin-left:10px">${esc(r.veh||'')}</span><span class="pill ${w.c}">${w.t}</span></span></summary>${c.l.map(x=>card(x)).join('')}</details>`}).join('')}
+function seasonChg(){wtShow();$('rim').value='';$('tpms').checked=false;
+  const reg=$('reg').value.trim().toUpperCase();upd();if(!reg)return;
+  const l=recs.filter(r=>(r.reg||'').trim().toUpperCase()===reg&&(r.season||'s')===curSeason()&&(r.setn||'')===$('setn').value.trim()).sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+  if(l.length){prefill(l[0]);$('scanmsg').textContent='Hittade tidigare mätning av den här däckuppsättningen från '+l[0].date+'.'}
+  else{$('scanmsg').textContent='Ingen tidigare mätning av den här däckuppsättningen.';wIn().forEach(e=>e.placeholder='');$('odo').placeholder=''}
+}
+let cur=1,lastReg='';
+const STEPS=['Regnr','Kund','Däck','Djup'];
+function drawSteps(){$('stepbar').innerHTML=STEPS.map((s,i)=>`<span class="st${i+1===cur?' on':i+1<cur?' done':''}"${i+1<cur?` onclick="goStep(${i+1})" style="cursor:pointer"`:''}><i>${i+1}</i>${s}</span>`).join('');[1,2,3,4].forEach(n=>$('s'+n).hidden=n!==cur);$('bk').hidden=cur===1;$('prepw').hidden=!(cur>=2&&(!editId||editPrep));$('prepn').hidden=!(cur>=2&&!editId);$('prepb').textContent=editId?'Spara ändringar utan mätning':'Spara kund och fordon utan mätning';$('nx').textContent=cur===4?(editId?'Spara ändringar':'Spara mätning'):'Nästa'}
+function goStep(n){
+  cur=Math.max(1,Math.min(4,n));if(cur!==4)ble.pos=-1;$('err').textContent='';drawSteps();try{window.scrollTo(0,0)}catch(e){}}
+function resetForm(){tcMode=false;$('tcbar').hidden=true;$('date').value=todayS();dmgFiles=[];['name','driver','veh','phone','email','brand','dim','odo','ev','wt','rim','loc','setn','note','contact'].forEach(k=>$(k).value='');$('odo').placeholder='';document.querySelectorAll('.adim').forEach(e=>e.value='');wIn().forEach(e=>{e.value='';e.placeholder=''});clrNw();clrBr();$('tpms').checked=false}
+function editCust(){$('custf').hidden=false;$('found').hidden=true}
+function step2UI(){
+  const reg=$('reg').value.trim().toUpperCase(),f=$('found'),c=$('custf');
+  const l=recs.filter(r=>(r.reg||'').trim().toUpperCase()===reg).sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+  if(l.length){
+    const kv=[['Fordonstyp',KAT[$('kat').value]],['Namn',$('name').value],['Kontaktperson',$('contact').value],['Fordon',$('veh').value],['Telefon',$('phone').value],['E-post',$('email').value]].filter(a=>a[1]);
+    f.hidden=false;c.hidden=true;
+    f.innerHTML=`<p class="note" style="margin:0 0 8px"><b>Känt fordon.</b> ${l[0].prep?'Förberett '+esc(l[0].date)+', inte mätt än.':'Tidigare mätt '+esc(l[0].date)+'. Uppgifterna är hämtade från den mätningen.'}</p><div class="kv">${kv.map(([k,v])=>`<div><span class="sub">${k}</span><br><b>${esc(v)}</b></div>`).join('')}</div><button class="ghost" onclick="editCust()">Ändra uppgifter</button>`;
+  }else{f.hidden=true;f.innerHTML='';c.hidden=false}
+}
+function nextStep(){
+  $('err').textContent='';
+  if(cur===1){
+    const reg=normReg($('reg').value);
+    if(!reg){$('err').textContent='Fyll i registreringsnummer eller maskin-ID.';return}
+    $('reg').value=reg;
+    if(reg!==lastReg){if(!editId){const kp=prepKeep;resetForm();lookupReg();if(!recs.some(r=>rk(r.reg)===rk(reg)))$('kat').value='';if(kp&&!recs.some(r=>rk(r.reg)===rk(reg))){$('name').value=kp.name||'';$('phone').value=kp.phone||'';$('email').value=kp.email||'';$('contact').value=kp.contact||''}}lastReg=reg}
+    step2UI();goStep($('found').hidden?2:3);return}
+  if(cur===2&&!$('kat').value){$('err').textContent='Välj fordonstyp.';return}
+  if(cur===4){saveRec();return}
+  if(cur===3&&$('season').value==='v'&&!noSeason()&&!$('wt').value){$('err').textContent='Välj om vinterdäcken är dubbade eller friktion.';return}
+  if(cur===3){const gb=$('brand').value.trim();if(gb)bIn().forEach(e=>{if(!e.value)e.value=gb})}
+  goStep(cur+1);if(cur===4)upd();
+}
+let editId=null,editFrom='',warnKey='';
+function cancelEdit(){editId=null;editPrep=false;$('plats').value=cfg.plats||'';$('date').value=todayS();$('editbar').hidden=true;resetForm();$('reg').value='';lastReg='';goStep(1);location.hash=editFrom||'#kunder'}
+let editPrep=false;
+function editRec(id,stp){
+  const r=recs.find(x=>x.id===id);if(!r)return;
+  editId=id;editPrep=!!r.prep;editFrom=location.hash||'#kunder';
+  $('reg').value=r.reg||'';lastReg=(r.reg||'').trim().toUpperCase();
+  ['name','driver','veh','phone','email','brand','dim','contact'].forEach(k=>$(k).value=r[k]||'');
+  $('date').value=r.prep?todayS():(r.date||'');$('plats').value=r.plats||cfg.plats||'';$('note').value=r.note||'';$('odo').value=r.odo!=null?r.odo:'';$('ev').value=r.ev||'';$('loc').value=r.loc||'';$('setn').value=r.setn||'';evChg();
+  $('rim').value=r.rim||'';$('tpms').checked=!!r.tpms;
+  $('season').innerHTML='<option value="s">Sommardäck</option><option value="v">Vinterdäck</option><option value="a">Året runt</option>';$('season').value=r.season||'s';
+  $('kat').value=katOf(r);$('vt').value=KB[katOf(r)];$('nt').value=r.d.length;showHeavy();wtShow();$('wt').value=r.season==='v'?(r.wt||''):'';
+  if(r.ax){$('na').value=r.ax.length;buildAx();document.querySelectorAll('#axd .axl input:not(.axwc)').forEach((e,i)=>e.checked=!!r.ax[i]);document.querySelectorAll('.adim').forEach((e,i)=>e.value=(r.axd||[])[i]||'');setAxw(r)}
+  $('nd').value=r.nd||'';if(r.bp!=null){$('bp').value=r.bp;$('wp').value=r.wp}
+  $('arx').hidden=$('vt').value!=='ar';$('rule').textContent=NOTE[$('vt').value];
+  buildW();clrNw();wIn().forEach((e,i)=>e.value=r.d[i]!=null?r.d[i]:'');
+  (r.nw||[]).forEach((v,i)=>{const c=$('n'+i);if(c)c.checked=!!v});
+  bIn().forEach((e,i)=>e.value=(r.bd&&r.bd[i])||'');$('p3t').checked=!!r.p3;fillX(r,true);
+  $('editbar').hidden=false;$('editdate').textContent=r.date+(r.reg?' ('+r.reg+')':'');
+  step2UI();if(stp===2)editCust();upd();goStep(stp||4);location.hash='#mat';
+}
+let ble={dev:null,pos:-1,last:0,actx:null};
+const BLE_SVC=['0000ffe0-0000-1000-8000-00805f9b34fb','0000fff0-0000-1000-8000-00805f9b34fb','0000ffb0-0000-1000-8000-00805f9b34fb','0000ffd0-0000-1000-8000-00805f9b34fb','0000ffa0-0000-1000-8000-00805f9b34fb','0000ffc0-0000-1000-8000-00805f9b34fb','6e400001-b5a3-f393-e0a9-e50e24dcca9e','49535343-fe7d-4ae5-8fa9-9fafd205e455','0000181d-0000-1000-8000-00805f9b34fb','0000181a-0000-1000-8000-00805f9b34fb','0000180d-0000-1000-8000-00805f9b34fb','0000ae00-0000-1000-8000-00805f9b34fb','0000fee0-0000-1000-8000-00805f9b34fb'];
+function order(){
+  const n=wIn().length,W=wheelsOf($('vt').value,heavy()?axles():null,n),L=W.map((w,i)=>({i,a:w.a,s:w.s})).filter(o=>o.i<n);
+  return [...L.filter(o=>o.s<0).sort((p,q)=>p.a-q.a||p.s-q.s),...L.filter(o=>o.s>0).sort((p,q)=>q.a-p.a||p.s-q.s)].map(o=>o.i)}
+function beep(n){
+  try{const c=ble.actx||(ble.actx=new (window.AudioContext||window.webkitAudioContext)());if(c.resume)c.resume();
+    for(let k=0;k<(n||1);k++){const o=c.createOscillator(),g=c.createGain();o.frequency.value=k?1320:880;g.gain.value=.25;o.connect(g);g.connect(c.destination);const t=c.currentTime+k*.18;o.start(t);o.stop(t+.12)}}catch(e){}
+  try{if(navigator.vibrate)navigator.vibrate(n>1?[80,60,80]:80)}catch(e){}}
+function seqIds(){const o=order();return o.flatMap(i=>p3on()?['pi'+i,'d'+i,'po'+i]:['d'+i])}
+const PTN={pi:'inner',d:'mitt',po:'ytter'};
+function seqNext(p){
+  ble.pos=p;const o=seqIds();
+  if(p>=o.length){ble.pos=-1;hl(-1);$('bstat').textContent='Klart: alla däck är mätta.';beep(2);return}
+  const id=o[p],i=+id.replace(/\D/g,''),e=$(id);hl(i);
+  if(e){e.scrollIntoView({block:'center',behavior:'smooth'});if(!ble.dev)e.focus()}
+  $('bstat').innerHTML='Mät nu: <b>'+esc(wIn()[i].dataset.l)+(p3on()?' '+PTN[id.replace(/\d/g,'')]:'')+'</b> ('+(p+1)+' av '+o.length+')'}
+function seqStart(){try{ble.actx=ble.actx||new (window.AudioContext||window.webkitAudioContext)();ble.actx.resume()}catch(e){}seqNext(0)}
+function seqSkip(){if(ble.pos>=0)seqNext(ble.pos+1)}
+function seqBack(){if(ble.pos>0)seqNext(ble.pos-1)}
+function seqStop(){ble.pos=-1;hl(-1);$('bstat').textContent='Sekvensen är stoppad.'}
+function onDepth(v){
+  const now=Date.now();if(now-ble.last<800)return;ble.last=now;
+  if(ble.pos<0){$('bstat').textContent='Mottog '+f1(v)+' mm. Tryck på Starta sekvens för att fylla i hjulen i ordning.';return}
+  const e=$(seqIds()[ble.pos]);if(!e)return;
+  e.value=v.toFixed(1);upd();beep(1);seqNext(ble.pos+1)}
+function wKey(ev,id){
+  if(ev.key!=='Enter')return;const e=$(id);if(!e||e.value==='')return;
+  ev.preventDefault();const o=seqIds(),p=o.indexOf(id);
+  if(p>=0&&p+1<o.length){beep(1);seqNext(p+1)}else{beep(2);ble.pos=-1;hl(-1);$('bstat').textContent='Klart: alla däck är mätta.'}}
+function parseBle(dv){
+  const sc=$('bscale').value,b=new Uint8Array(dv.buffer,dv.byteOffset,dv.byteLength);
+  let txt='';try{txt=new TextDecoder().decode(b)}catch(e){}
+  let r=null,dec=false;
+  const m=/^[\x20-\x7e\r\n\t]+$/.test(txt)&&txt.match(/-?\d+(?:[.,]\d+)?/);
+  if(m){r=parseFloat(m[0].replace(',','.'));dec=/[.,]/.test(m[0])}
+  else if(b.length>=2)r=dv.getUint16(0,true);else if(b.length===1)r=b[0];
+  if(r==null||isNaN(r)||r<0)return null;
+  if(dec&&sc==='auto')return r<=120?r:null;
+  const ds=sc==='x1'?[1]:sc==='d10'?[10]:sc==='d100'?[100]:[1,10,100];
+  for(const d of ds){const v=r/d;if(v<=(sc==='auto'?30:120))return v}
+  return null}
+function bleVal(ev){
+  const dv=ev.target.value,b=new Uint8Array(dv.buffer,dv.byteOffset,dv.byteLength),raw=[...b].map(x=>x.toString(16).padStart(2,'0')).join(' '),v=parseBle(dv);
+  $('braw').textContent='Senast mottaget: '+raw+(v==null?' (kunde inte tolkas)':' = '+f1(v)+' mm');
+  if(v!=null)onDepth(v)}
+async function bleConnect(){
+  const m=$('bmsg');
+  try{
+    try{ble.actx=ble.actx||new (window.AudioContext||window.webkitAudioContext)();ble.actx.resume()}catch(e){}
+    if(!navigator.bluetooth){m.textContent='Bluetooth stöds inte i den här webbläsaren. Det fungerar i Chrome på Android och dator, men inte i Safari på iPhone.';return}
+    m.textContent='Välj mätstickan i listan...';
+    const dev=await navigator.bluetooth.requestDevice({acceptAllDevices:true,optionalServices:BLE_SVC});
+    dev.addEventListener('gattserverdisconnected',()=>{ble.dev=null;$('bmsg').textContent='Mätstickan kopplades från. Tryck Anslut igen.';$('bconn').textContent='Anslut mätsticka'});
+    const srv=await dev.gatt.connect(),svcs=await srv.getPrimaryServices();let n=0;
+    for(const s of svcs){for(const c of await s.getCharacteristics()){if(c.properties.notify||c.properties.indicate){try{await c.startNotifications();c.addEventListener('characteristicvaluechanged',bleVal);n++}catch(e){}}}}
+    ble.dev=dev;$('bconn').textContent='Ansluten: '+(dev.name||'mätsticka');
+    m.textContent=n?'Ansluten. Tryck på mätstickans knapp för att testa, eller tryck Starta sekvens.':'Ansluten, men jag hittade ingen datakanal. Skriv till mig vilken modell det är så anpassar jag det.';
+  }catch(e){
+    m.textContent=e&&e.name==='NotFoundError'?'Ingen mätsticka valdes.':e&&e.name==='SecurityError'?'Sidan får inte använda Bluetooth här. Prova att öppna länken direkt i Chrome.':'Kunde inte ansluta ('+((e&&e.name)||'fel')+').'}}
+const noSeason=()=>true;
+const curSeason=()=>noSeason()?'x':$('season').value;
+const bIn=()=>[...document.querySelectorAll('#wheels input[data-b]')];
+const clrBr=()=>bIn().forEach(e=>e.value='');
+const FOLD={s:'Sommardäck',v:'Vinterdäck',a:'Året runt',x:'Lastbilar, bussar och maskiner'};
+const wIn=()=>[...document.querySelectorAll('#wheels input.dep')];
+const nwArr=()=>wIn().map((e,i)=>{const c=$('n'+i);return !!(c&&c.checked)});
+const clrNw=()=>{document.querySelectorAll('#wheels input[type=checkbox]').forEach(e=>e.checked=false);clrX()};
+const WT={d:'dubbat',f:'friktion'};
+const stName=r=>r.season==='x'?'':(SEAS[r.season]||'Okänd')+(r.season==='v'&&r.wt?' '+WT[r.wt]:'')+(r.setn?' ('+r.setn+')':'');
+const stLabel=r=>stName(r)||KN(r);
+function wtShow(){const v=$('season').value==='v'&&!noSeason();$('wtw').hidden=!v;if(!v)$('wt').value=''}
+const rk=q=>(q||'').trim().toUpperCase();
+function rimChg(){const lo=$('rim').value==='lo';$('tpmsw').hidden=lo;if(lo)$('tpms').checked=false}
+function evChg(){}
+function showHeavy(){const h=heavy();{const b=$('axwb');if(b)b.hidden=!WK.includes($('kat').value)}try{brAuto(false)}catch(e){}$('prew').hidden=!h;preOpts();$('ntw').hidden=h;$('axw').hidden=!h;$('axd').hidden=!h;$('dimw').hidden=h;$('seasw').hidden=noSeason();$('setw').hidden=noSeason();$('evw').hidden=true;evChg();seasonOpts();$('odol').textContent='Mätarställning ('+($('vt').value==='ar'?'timmar':'km')+')'}
+function typeChg(){const t=$('vt').value;$('nt').value=DEF[t];$('arx').hidden=t!=='ar';$('rule').textContent=NOTE[t];showHeavy();if(heavy())preApply(KPRE[$('kat').value][0]);else buildW()}
+const PRE={'2d':{t:'2 axlar, dubbelmontage bak',ax:[0,1]},'2e':{t:'2 axlar, enkelmontage',ax:[0,0]},'3b':{t:'3 axlar, boggi med dubbelmontage bak',ax:[0,1,1]},'3s':{t:'3 axlar, dubbelmontage drivaxel, enkel stödaxel',ax:[0,1,0]},'3f':{t:'3 axlar, två framaxlar, dubbelmontage bak',ax:[0,0,1]},'4b':{t:'4 axlar, två framaxlar och boggi',ax:[0,0,1,1]},'3t':{t:'3 axlar, enkelmontage',ax:[0,0,0]},'1e':{t:'1 axel, enkelmontage',ax:[0]},'4d':{t:'4 axlar, dubbelmontage på alla',ax:[1,1,1,1]}};
+const KPRE={lb:['2d','3b','3s','3f','4b'],bu:['2d','3s'],sl:['3t','2e','1e','2d','3b','4d'],hj:['2e'],gr:['2d','2e'],du:['3t','2e'],tr:['2e'],ov:['2e','2d','3t']};
+function preOpts(){const k=$('kat').value;$('pre').innerHTML=(KPRE[k]||[]).map(p=>`<option value="${p}">${PRE[p].t}</option>`).join('')+'<option value="">Eget upplägg</option>'}
+function preApply(key){if(key)$('pre').value=key;key=$('pre').value;if(!key||!PRE[key])return;const a=PRE[key].ax;$('na').value=a.length;buildAx();document.querySelectorAll('#axd .axl input:not(.axwc)').forEach((e,i)=>e.checked=!!a[i]);buildW()}
+function preSync(){if(!heavy())return;const a=JSON.stringify(axles().map(Number)),k=(KPRE[$('kat').value]||[]).find(p=>JSON.stringify(PRE[p].ax)===a);$('pre').value=k||''}
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2200)}
+let prepKeep=null,tcMode=false;
+function tireChange(id){again(id);tcMode=true;$('tcbar').hidden=false;goStep(4);upd()}
+function tcStop(){tcMode=false;$('tcbar').hidden=true;resetForm();$('reg').value='';lastReg='';goStep(1);location.hash='#kunder'}
+function saveRec(prep){prep=prep===true;
+  const n=nIn(),d=[];for(let i=0;i<n;i++)d.push(prep?null:rd(i));const nw=nwArr(),bd=bIn().map(e=>e.value.trim());
+  const p=curP(),name=$('name').value.trim(),reg=normReg($('reg').value);
+  if(prep&&!(name||reg)){$('err').textContent='Fyll i registreringsnummer eller namn.';return}
+  if(!prep&&(!(name||reg)||d.every(v=>v==null))){$('err').textContent=tcMode?'Markera Nytt däck och fyll i djupet på de däck som byttes.':'Fyll i minst ett däckdjup.';return}
+  if(!prep&&p.vt==='ar'&&!(p.nd>0)){$('err').textContent='Ange nytt däckdjup i mm för arbetsmaskiner.';return}
+  if(!prep&&heavy()&&WK.includes($('kat').value)&&winterD($('date').value)&&axwVal().some(v=>v===null)){$('err').textContent='Ange vinterdäck, Ja eller Nej, för varje axel i steg 3. Det krävs 10 november till 10 april.';return}
+  if(tcMode&&!nw.some(Boolean)){$('err').textContent='Markera minst ett däck som Nytt däck.';return}
+  if(!prep&&nw.some((v,i)=>v&&d[i]==null)){$('err').textContent='Fyll i däckdjup för däck som markerats som nya.';return}
+  {const W=[],pv=recs.filter(r=>r.id!==editId&&(r.reg||'').trim().toUpperCase()===reg&&reg&&(r.season||'s')===curSeason()&&(r.setn||'')===$('setn').value.trim()&&r.d.length===d.length&&r.date<=$('date').value).sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id)[0],pr=prof(p);
+    if(d.some(v=>v!=null&&v>(p.vt==='ar'?(p.nd||99)*1.05:p.vt==='pb'?12:25)))W.push('Något däckdjup ser för stort ut. Kontrollera decimalerna.');
+    const rtN=xtr().rt||[];if(pv)d.forEach((v,i)=>{if(v!=null&&pv.d[i]!=null&&!nw[i]&&(rtN[i]||'')===((pv.rt||[])[i]||'')&&v>pv.d[i]+0.7)W.push((wl()[i]||'Däck '+(i+1))+' är djupare än förra mätningen ('+fmt(pv.d[i])+'). Är det ett nytt däck?')});
+    const lo=reg?lastOdo(reg,null):null,od=$('odo').value===''?null:parseFloat($('odo').value);if(!editId&&od!=null&&lo!=null&&od<lo)W.push('Mätarställningen är lägre än senast registrerade ('+lo.toLocaleString('sv-SE')+').');
+    const wk=W.join('|');if(!prep&&W.length&&warnKey!==wk){warnKey=wk;$('err').textContent=W.join(' ')+' Tryck Spara igen om det stämmer.';return}}
+  warnKey='';$('err').textContent='';
+  const rec={id:editId||(Date.now()*1000+Math.floor(Math.random()*1000)),date:$('date').value,name,reg,phone:$('phone').value.trim(),email:$('email').value.trim(),brand:$('brand').value.trim(),veh:$('veh').value.trim(),driver:$('driver').value.trim(),dim:$('dim').value.trim(),season:curSeason(),setn:noSeason()?'':$('setn').value.trim(),wt:curSeason()==='v'?$('wt').value:'',odo:$('odo').value===''?null:parseFloat($('odo').value),ev:'',loc:'',from:'',rim:$('rim').value,tpms:$('tpms').checked,vt:p.vt,kat:$('kat').value,plats:$('plats').value.trim(),note:$('note').value.trim(),contact:$('contact').value.trim(),d};rec.dim=normDim(rec.dim);if(rec.plats){cfg.plats=rec.plats;try{localStorage.setItem(KEY+'-cfg',JSON.stringify(cfg))}catch(e){}}Object.assign(rec,xtr());if(heavy()){rec.ax=axles();rec.axd=[...document.querySelectorAll('.adim')].map(e=>normDim(e.value));if(WK.includes(rec.kat))rec.axw=axwVal();const ap=axpVal();if(ap.some(v=>v!=null))rec.axp=ap}
+  if(editId){const old=recs.find(x=>x.id===editId);if(old&&old.cf){const cf=old.cf.map((c,i)=>c&&old.d[i]===d[i]?c:null);if(cf.some(Boolean))rec.cf=cf}}
+  if(editId){const o=recs.find(x=>x.id===editId);if(o){if(o.ph&&o.ph.length)rec.ph=o.ph;if(o.cp)rec.cp=true}}
+  if(nw.some(Boolean))rec.nw=nw;
+  if(bd.some(Boolean)){rec.bd=bd;if(!rec.brand){const m={};bd.filter(Boolean).forEach(b=>m[b]=(m[b]||0)+1);rec.brand=Object.entries(m).sort((a,b)=>b[1]-a[1])[0][0]}}
+  if(prep)rec.prep=true;if(tcMode&&!prep)rec.chg=true;
+  if(reg&&!editId&&!prep){const pv=recs.filter(r=>(r.reg||'').trim().toUpperCase()===reg&&(r.season||'s')===curSeason()&&(r.setn||'')===$('setn').value.trim()).sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id)[0];
+    if(pv&&(pv.vt||'pb')===p.vt&&pv.d.length===d.length&&JSON.stringify(pv.ax||null)===JSON.stringify(rec.ax||null)){const cf=d.map(()=>null);let any=false;d.forEach((v,i)=>{if(v==null&&pv.d[i]!=null&&!nw[i]){d[i]=pv.d[i];cf[i]=(pv.cf&&pv.cf[i])||pv.date;any=true}});if(any)rec.cf=cf}}
+  if(p.vt==='ar'){rec.nd=p.nd;rec.bp=p.bp;rec.wp=p.wp;cfg.bp=p.bp;cfg.wp=p.wp;try{localStorage.setItem(KEY+'-cfg',JSON.stringify(cfg))}catch(e){}}
+  if(editId){const ix=recs.findIndex(x=>x.id===editId);if(ix>=0)recs[ix]=rec;else recs.push(rec)}else recs.push(rec);
+  if(!prep&&reg)recs=recs.filter(q=>!(q.prep&&q.id!==rec.id&&rk(q.reg)===rk(reg)));
+  prepKeep=prep&&!editId?{name:rec.name,phone:rec.phone,email:rec.email,contact:rec.contact}:null;persist();
+  const pf=dmgFiles;dmgFiles=[];$('dmgprev').textContent='Till exempel skador eller ojämnt slitage. Högst 3 foton.';if(pf.length)sendPhotos(rec.id,pf);
+  ['name','reg','phone','email','brand','dim','veh','driver','note','contact'].forEach(i=>$(i).value='');
+  wIn().forEach(e=>e.value='');$('scanmsg').textContent='';$('date').value=todayS();warnKey='';$('odo').value='';$('ev').value='';$('loc').value='';$('setn').value='';evChg();$('rim').value='';$('tpms').checked=false;clrNw();clrBr();document.querySelectorAll('.adim').forEach(e=>e.value='');upd();const wasTc=tcMode;tcMode=false;$('tcbar').hidden=true;toast(wasTc?'Däckbytet är sparat.':prep&&editId?'Ändringarna är sparade, fordonet väntar fortfarande på mätning.':prep?'Fordonet är förberett. Fyll i nästa regnr, kunden står kvar.':editId?'Ändringarna sparade':rec.cf?'Mätningen sparad. Saknade hjul hämtades från förra mätningen.':'Mätningen sparad');lastReg='';const wasEdit=editId;editId=null;editPrep=false;$('plats').value=cfg.plats||'';$('editbar').hidden=true;goStep(1);if(wasEdit)location.hash=editFrom||'#kunder';
+}
+function again(id){const r=recs.find(x=>x.id===id);if(!r)return;editId=null;$('date').value=todayS();$('editbar').hidden=true;
+  ['name','reg','phone','email','brand','dim','veh','driver','contact'].forEach(k=>$(k).value=r[k]||'');$('season').value=r.season||'s';wtShow();if(r.season==='v')$('wt').value=r.wt||'';$('setn').value=r.setn||'';$('rim').value=r.rim||'';$('tpms').checked=!!r.tpms;
+  $('kat').value=katOf(r);$('vt').value=KB[katOf(r)];$('nt').value=r.d.length;showHeavy();if(r.ax){$('na').value=r.ax.length;buildAx();document.querySelectorAll('#axd .axl input:not(.axwc)').forEach((e,i)=>e.checked=!!r.ax[i]);document.querySelectorAll('.adim').forEach((e,i)=>e.value=(r.axd||[])[i]||'');setAxw(r)}$('nd').value=r.nd||'';if(r.bp!=null){$('bp').value=r.bp;$('wp').value=r.wp}
+  $('arx').hidden=$('vt').value!=='ar';$('rule').textContent=NOTE[$('vt').value];buildW();
+  wIn().forEach(e=>e.value='');clrNw();bIn().forEach((e,i)=>e.value=(r.bd&&r.bd[i])||'');fillX(r,false);upd();lastReg=$('reg').value.trim().toUpperCase();step2UI();goStep(2);location.hash='#mat'}
+function delCar(ids,b){
+  if(b.dataset.s!=='1'){b.dataset.s='1';b.textContent='Bekräfta: radera fordonet och alla '+ids.length+' mätningar';return}
+  const S=new Set(ids);recs=recs.filter(r=>!S.has(r.id));persist();renderList();toast('Fordonet och dess mätningar är raderade')}
+function del(id,b){if(b.dataset.s!=='1'){b.dataset.s='1';b.textContent='Bekräfta borttagning';return}recs=recs.filter(r=>r.id!==id);persist();renderList();toast('Mätningen borttagen')}
+function groups(){const m={},V={},VK={};recs.forEach(r=>{const vk=(r.reg||'').trim().toUpperCase()||(r.name||'').trim().toLowerCase(),k=vk+'|'+(r.season||'s')+'|'+(r.setn||'').trim().toLowerCase();VK[k]=vk;(m[k]=m[k]||[]).push(r);(V[vk]=V[vk]||[]).push(r)});
+  return Object.entries(m).map(([k,l])=>{l.sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);const last=l[0],p=prof(Object.assign({},last,{date:new Date().toLocaleDateString('sv-SE')}));return{l,last,p,min:mn(last.d),veh:V[VK[k]]}})}
+const sOf=x=>winterLack(x.last,todayS())?{c:'bad',t:'Saknar vinterdäck'}:st(x.min,x.p);
+const card=x=>{const r=x.last,s=sOf(x);return `<details class="card"><summary><div class="row"><div><b class="nm">${esc(r.name||'Namnlös')}</b><span class="sub">${esc(r.reg)}</span><span class="sub">${stName(r)}</span><span class="sub">${esc(r.veh)}</span><span class="sub">${esc(r.brand)}</span></div><span class="pill ${s.c}">${s.t}</span></div>${gauge(x.min,x.p)}<span class="sub blk">${KN(r)}, ${r.ax?r.ax.length+' axlar, ':''}${r.d.length} däck. ${r.prep?'Förberedd '+esc(r.date)+', inte mätt än':'Lägsta '+fmt(x.min)+', mätt '+esc(r.date)+(r.plats?' i '+esc(r.plats):'')}${r.p3&&r.p3.some(unev)?`<br><span class="unev">Ojämnt slitage: ${esc(labelsOf(r).filter((_,i)=>unev(r.p3[i])).join(', '))}</span>`:''}${winterLack(r,todayS())?'<br><span class="unev">Saknar vinterdäck: '+esc(wTxt(r))+'</span>':''}</span></summary><div class="hist">${axleSVG(r.vt||'pb',r.ax||null,r.d,x.p,false,r.cf,r.nw,r.p3?r.p3.map(unev):null)}${wearSum(x)}${r.email?`<div class="h"><span>E-post ${esc(r.email)}</span><span><a class="ghost" style="display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:8px;color:var(--ink);font-weight:600;text-decoration:none" href="mailto:${esc(r.email)}?subject=${encodeURIComponent('Däckkontroll '+(r.reg||''))}&body=${encodeURIComponent(smsText(x))}">Skicka e-post</a></span></div>`:''}${r.phone?`<div class="h"><span>Telefon ${esc(r.phone)}</span><span><a class="ghost" style="display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:8px;color:var(--ink);font-weight:600;text-decoration:none" href="tel:${esc(r.phone.replace(/[^+\d]/g,''))}">Ring</a> <a class="ghost" style="display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:8px;color:var(--ink);font-weight:600;text-decoration:none" href="sms:${esc(r.phone.replace(/[^+\d]/g,''))}?body=${encodeURIComponent(smsText(x))}">SMS</a></span></div>`:''}${x.l.map(h=>`<div class="h"><span>${esc(h.date)}${h.chg?' · däckbyte':''}${h.plats?' · '+esc(h.plats):''}${h.note?' · '+esc(h.note):''}, ${h.odo!=null?h.odo.toLocaleString('sv-SE')+(h.vt==='ar'?' tim, ':' km, '):''}${stName(h)}${h.ev==='on'&&isCopy(h)?' (monterades, ej mätt)':''} ${esc(h.axd&&h.axd.some(Boolean)?h.axd.map((v,i)=>'A'+(i+1)+' '+v).join(', '):h.dim)}</span><span>${h.d.map((v,k)=>fmt(v)+(h.cf&&h.cf[k]?' (från '+h.cf[k]+')':'')+(h.nw&&h.nw[k]?' (nytt)':'')).join(' / ')}</span><button class="ghost" onclick="openOld(${h.id})">Öppna</button><button class="ghost" onclick="editRec(${h.id})">Redigera</button><button class="ghost" onclick="del(${h.id},this)">Ta bort</button></div>`).join('')}<div style="padding-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button onclick="again(${r.id})">Mät igen</button>${r.prep?'':`<button class="ghost" onclick="tireChange(${r.id})">Registrera däckbyte</button>`}<button class="ghost" onclick="editRec(${r.id},2)">${r.prep?'Ändra uppgifter':'Ändra kund och fordon'}</button><button class="ghost" onclick="openOld(${r.id})">Rapport</button><button class="ghost" onclick="delCar([${(x.veh||x.l).map(q=>q.id)}],this)">Radera fordon</button></div></div></details>`};
+function normN(n){return (n||'').toLowerCase().replace(/\b(ab|hb|kb|aktiebolag|handelsbolag)\b/g,'').replace(/[^a-zåäö0-9]/g,'')}
+function dupNames(){const N=[...new Set(recs.map(r=>(r.name||'').trim()).filter(Boolean))],out=[];for(let i=0;i<N.length;i++)for(let j=i+1;j<N.length;j++){const a=normN(N[i]),b=normN(N[j]);if(a&&b&&(a===b||(Math.min(a.length,b.length)>=4&&(a.startsWith(b)||b.startsWith(a)))))out.push([N[i],N[j]])}return out}
+function mergeNames(a,b,btn){if(btn.dataset.s!=='1'){btn.dataset.s='1';btn.textContent='Bekräfta: slå ihop';return}
+  const n=recs.filter(r=>(r.name||'').trim()===a).length;recs.forEach(r=>{if((r.name||'').trim()===a)r.name=b});persist();renderList();renderTools();toast(n+' mätningar flyttades till '+b)}
+function crc32(b){let c,t=crc32.t;if(!t){t=crc32.t=[];for(let n=0;n<256;n++){c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}}c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=t[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0}
+function zipStore(files){const enc=new TextEncoder(),parts=[],cen=[];let off=0;const d=new Date(),dt=((d.getFullYear()-1980)<<9)|((d.getMonth()+1)<<5)|d.getDate(),tm=(d.getHours()<<11)|(d.getMinutes()<<5)|(d.getSeconds()>>1);
+  files.forEach(([name,txt])=>{const nb=enc.encode(name),db=enc.encode(txt),crc=crc32(db),h=new DataView(new ArrayBuffer(30));
+    h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x0800,true);h.setUint16(8,0,true);h.setUint16(10,tm,true);h.setUint16(12,dt,true);h.setUint32(14,crc,true);h.setUint32(18,db.length,true);h.setUint32(22,db.length,true);h.setUint16(26,nb.length,true);h.setUint16(28,0,true);
+    parts.push(new Uint8Array(h.buffer),nb,db);
+    const c=new DataView(new ArrayBuffer(46));c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint16(8,0x0800,true);c.setUint16(10,0,true);c.setUint16(12,tm,true);c.setUint16(14,dt,true);c.setUint32(16,crc,true);c.setUint32(20,db.length,true);c.setUint32(24,db.length,true);c.setUint16(28,nb.length,true);c.setUint16(30,0,true);c.setUint16(32,0,true);c.setUint16(34,0,true);c.setUint16(36,0,true);c.setUint32(38,0,true);c.setUint32(42,off,true);
+    cen.push(new Uint8Array(c.buffer),nb);off+=30+nb.length+db.length});
+  const cs=cen.reduce((a,b)=>a+b.length,0),e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cs,true);e.setUint32(16,off,true);
+  return new Blob([...parts,...cen,new Uint8Array(e.buffer)],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}
+function xlsxBlob(sheets){const X=v=>String(v).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])).replace(/[\x00-\x08\x0b\x0c\x0e-\x1f]/g,'');
+  const col=n=>{let s='';n++;while(n){const m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26)}return s};
+  const cell=(sh,v,ri)=>v!==null&&typeof v==='object'&&!(v instanceof Date)?v:{v,s:sh.plain&&ri===0?1:0};
+  const sx=sh=>{const fr=sh.freeze==null?(sh.plain?1:0):sh.freeze,nc=Math.max(...sh.rows.map(r=>r.length));
+    const W=sh.widths||Array.from({length:nc},(_,c)=>Math.min(50,Math.max(8,...sh.rows.map((r,ri)=>{const x=r[c]==null?'':cell(sh,r[c],ri).v;return String(x==null?'':x).length+2}))));
+    const flt=sh.filter||(sh.plain?`A1:${col(nc-1)}${sh.rows.length}`:null);
+    return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0">'+(fr?`<pane ySplit="${fr}" topLeftCell="A${fr+1}" activePane="bottomLeft" state="frozen"/>`:'')+'</sheetView></sheetViews><cols>'+W.map((w,i)=>`<col min="${i+1}" max="${i+1}" width="${w}" customWidth="1"/>`).join('')+'</cols><sheetData>'
+    +sh.rows.map((r,ri)=>`<row r="${ri+1}">`+r.map((raw,ci)=>{if(raw==null)return '';const c=cell(sh,raw,ri),ref=col(ci)+(ri+1),st=c.s?` s="${c.s}"`:'';
+      if(c.f)return `<c r="${ref}"${st}><f>${X(c.f)}</f></c>`;const v=c.v;if(v==null||v==='')return c.s?`<c r="${ref}"${st}/>`:'';
+      if(typeof v==='number'&&isFinite(v))return `<c r="${ref}"${st}><v>${v}</v></c>`;return `<c r="${ref}" t="inlineStr"${st}><is><t xml:space="preserve">${X(v)}</t></is></c>`}).join('')+'</row>').join('')
+    +'</sheetData>'+(flt?`<autoFilter ref="${flt}"/>`:'')+'</worksheet>'};
+  const fl=sh=>sh.filter||(sh.plain?`A1:${col(Math.max(...sh.rows.map(r=>r.length))-1)}${sh.rows.length}`:null);
+  const abs=r=>r.replace(/([A-Z]+)(\d+)/g,'$$$1$$$2');
+  const styles='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+    +'<fonts count="5"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font><font><sz val="12"/><name val="Calibri"/></font><font><b/><sz val="12"/><name val="Calibri"/></font><font><b/><sz val="14"/><name val="Calibri"/></font></fonts>'
+    +'<fills count="8"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill>'+['FFEDEFF1','FFFF0000','FFFFFF00','FF00FF00','FFEBF1DE','FF92D050'].map(c=>`<fill><patternFill patternType="solid"><fgColor rgb="${c}"/></patternFill></fill>`).join('')+'</fills>'
+    +'<borders count="4"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style="thin"/><right style="thin"/><top style="thin"/><bottom style="thin"/><diagonal/></border><border><left style="thin"/><right style="thin"/><top style="thin"/><bottom style="thick"/><diagonal/></border><border><left style="medium"/><right style="medium"/><top style="medium"/><bottom style="medium"/><diagonal/></border></borders>'
+    +'<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>'
+    +'<cellXfs count="18">'+[[0,0,0],[1,2,0],[4,0,0],[2,3,0],[2,4,0],[2,5,0],[2,0,2],[2,0,1],[2,3,1,1],[2,4,1,1],[2,5,1,1],[2,0,1,1],[1,6,3,1],[1,0,3,1],[3,0,3,1],[3,6,3,1],[3,7,3,1],[2,0,0]].map(([f,fi,b,c])=>`<xf numFmtId="0" fontId="${f}" fillId="${fi}" borderId="${b}" xfId="0"${f?' applyFont="1"':''}${fi?' applyFill="1"':''}${b?' applyBorder="1"':''}${c?' applyAlignment="1"><alignment horizontal="center"/></xf>':'/>'}`).join('')+'</cellXfs>'
+    +'<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';
+  const f=[['[Content_Types].xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'+sheets.map((_,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')+'</Types>'],
+    ['_rels/.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'],
+    ['xl/workbook.xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'+sheets.map((s,i)=>`<sheet name="${X(s.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('')+'</sheets>'+(sheets.some(fl)?'<definedNames>'+sheets.map((s,i)=>fl(s)?`<definedName name="_xlnm._FilterDatabase" localSheetId="${i}" hidden="1">'${X(s.name.replace(/'/g,"''"))}'!${abs(fl(s))}</definedName>`:'').join('')+'</definedNames>':'')+'<calcPr calcId="191029" fullCalcOnLoad="1"/></workbook>'],
+    ['xl/_rels/workbook.xml.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+sheets.map((_,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join('')+`<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`],
+    ['xl/styles.xml',styles],
+    ...sheets.map((s,i)=>['xl/worksheets/sheet'+(i+1)+'.xml',sx(s)])];
+  return zipStore(f)}
+/* Sorteringsblad per ort, i samma upplägg som kundens egna sorteringslistor */
+const RIM={al:'Aluminiumfälg',pl:'Plåtfälg',lo:'Lösa däck'};
+const SCOL=['VF','HF','VID','VYD','HID','HYD','VLÖP','HLÖP'],SGRP={F:'DIM FRAM',D:'DRIV',L:'DIM LÖP',S:'SLÄP'};
+const nTxt=v=>Number.isInteger(v)?String(v):String(Math.round(v*10)/10).replace('.',',');
+function sortRow(r,p){const vt=r.vt||'pb',n=r.d.length,ax=r.ax||[],W=wheelsOf(vt,ax.length?ax:null,n),sl=katOf(r)==='sl',fd=ax.indexOf(true);
+  const grp=a=>ax[a]?'D':sl?'L':fd<0?(a===0?'F':'L'):(a<fd?'F':'L');
+  const C={};SCOL.forEach(k=>C[k]=[]);const cnt={},dims={F:'',D:'',L:''},axN={F:new Set(),D:new Set(),L:new Set()};
+  W.forEach((w,i)=>{const g=grp(w.a),k=g==='F'?(w.s<0?'VF':'HF'):g==='L'?(w.s<0?'VLÖP':'HLÖP'):(w.s===-2?'VYD':w.s===2?'HYD':w.s===-1?'VID':'HID');
+    axN[g].add(w.a);const dm=dimFix((r.axd||[])[w.a]||r.dim||'');if(!dims[g])dims[g]=dm;
+    if(r.d[i]!=null){C[k].push(r.d[i]);const c=st(r.d[i],p).c;if(c==='bad'||c==='warn'){const key=(sl?'S':g)+'|'+(dm||'Okänd dimension');cnt[key]=(cnt[key]||0)+1}}else C[k].push(null)});
+  const info=[];if(axN.F.size>1)info.push('dubbla styr');if(axN.D.size>1)info.push('dubbla driv');if(sl)info.push('släp');else if(KB[katOf(r)]==='ar')info.push(KN(r).toLowerCase());
+  if(r.p3&&r.p3.some(unev))info.push('ojämnt slitage');if(r.rt&&r.rt.some(Boolean))info.push('omskuret/regummerat');if(r.nw&&r.nw.some(Boolean))info.push('nya däck');if(r.driver)info.push('förare '+r.driver);
+  if(r.d.every(v=>v==null))info.push('ej mätt');
+  const cells=SCOL.map(k=>{const a=C[k].filter(v=>v!=null);if(!a.length)return {v:'',s:7};const m=Math.min(...a),c=st(m,p).c;return {v:a.length===1&&C[k].length===1?Math.round(a[0]*10)/10:C[k].map(v=>v==null?'?':nTxt(v)).join('+'),s:c==='bad'?8:c==='warn'?9:10}});
+  return {cells,dims,info:info.join(', '),cnt}}
+function sortSheets(k){buildRims();const today=new Date().toLocaleDateString('sv-SE'),G=groups().filter(x=>ofK(k)(x.last)),T={};
+  G.forEach(x=>{const kt=katOf(x.last);(T[kt]=T[kt]||[]).push(x)});
+  const col=n=>{let s='';n++;while(n){const m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26)}return s};
+  const ORD=['F','D','L','S','A'],GL={F:'DIM FRAM',D:'DRIV',L:'DIM LÖP',S:'SLÄP',A:'DIM'},out=[];
+  const cellOf=(vals,p)=>{const a=vals.filter(v=>v!=null);if(!a.length)return {v:'',s:7};const m=Math.min(...a),c=st(m,p).c;return {v:vals.length===1?Math.round(a[0]*10)/10:vals.map(v=>v==null?'?':nTxt(v)).join('+'),s:c==='bad'?8:c==='warn'?9:10}};
+  const wint=r=>{if(!r.axw)return {v:'',s:7};const n=r.axw.map((v,i)=>v===false?i+1:null).filter(Boolean);return {v:n.length?'Nej axel '+n.join('+'):r.axw.every(v=>v===true)?'Ja':r.axw.every(v=>v==null)?'':'Delvis kontrollerat',s:n.length?8:7}};
+  const block=(kt,LL,start,title,legend)=>{
+    const L=LL.sort((a,b)=>(a.last.plats||'').localeCompare(b.last.plats||'','sv')||(a.last.reg||'').localeCompare(b.last.reg||'','sv',{numeric:true}));
+    const truck=kt==='lb'||kt==='bu',mach=KB[kt]==='ar';let pos,R;
+    if(truck){pos=SCOL;R=L.map(x=>{const s=sortRow(x.last,x.p);return {x,cells:s.cells,dims:[s.dims.F,s.dims.D,s.dims.L],cnt:s.cnt}})}
+    else{const axOf=r=>r.ax&&r.ax.length?r.ax:Array.from({length:Math.ceil(r.d.length/2)},()=>false),nA=Math.max(...L.map(x=>axOf(x.last).length)),dual=Array.from({length:nA},(_,a)=>L.some(x=>axOf(x.last)[a]));
+      pos=[];for(let a=0;a<nA;a++)pos.push(...(dual[a]?['VY','VI','HI','HY']:['V','H']).map(t=>'A'+(a+1)+' '+t));
+      R=L.map(x=>{const r=x.last,ax=axOf(r),W=wheelsOf(r.vt||'pb',r.ax&&r.ax.length?r.ax:null,r.d.length),V={},cnt={};
+        W.forEach((w,i)=>{const a=w.one?w.a:w.a,t=ax[a]?(w.s===-2?'VY':w.s===-1?'VI':w.s===1?'HI':'HY'):(w.s<0?(dual[a]?'VY':'V'):(dual[a]?'HY':'H')),key='A'+(a+1)+' '+t;(V[key]=V[key]||[]).push(r.d[i]);
+          const dm=dimFix((r.axd||[])[a]||r.dim||'');if(r.d[i]!=null){const c=st(r.d[i],x.p).c;if(c==='bad'||c==='warn'){const kk=(kt==='sl'?'S':'A')+'|'+(dm||'Okänd dimension');cnt[kk]=(cnt[kk]||0)+1}}});
+        const dims=[...new Set((r.axd&&r.axd.some(Boolean)?r.axd:[r.dim]).map(dimFix).filter(Boolean))];
+        return {x,cells:pos.map(c=>V[c]?cellOf(V[c],x.p):{v:'',s:7}),dims:[dims.join(' / ')],cnt}})}
+    const dimH=truck?['DIM FRAM','DIM DRIV','DIM LÖP']:['DIMENSION'];
+    const exH=truck?['MÄTARST. (km)','FÄLG','TPMS','VINTERDÄCK','ANTECKNING']:mach?['TIMMAR','NYTT DJUP (mm)','BYT NU UNDER (mm)','BYT SNART UNDER (mm)','FÄLG','ANTECKNING']:['MÄTARST. (km)','FÄLG','TPMS','VINTERDÄCK','ANTECKNING'];
+    const ex=r=>truck||!mach?[{v:r.odo!=null?r.odo:'',s:7},{v:RIM[r.rim]||'',s:7},{v:r.tpms?'Ja':'',s:7},wint(r),{v:r.note||'',s:7}]
+      :[{v:r.odo!=null?r.odo:'',s:7},{v:r.nd||'',s:7},{v:Math.round(prof(r).bad*10)/10||'',s:7},{v:Math.round(prof(r).warn*10)/10||'',s:7},{v:RIM[r.rim]||'',s:7},{v:r.note||'',s:7}];
+    const head=['Reg nr','Kund','Ort','Fabrikat','Datum',...pos,...dimH,...exH],c0=head.length+1;
+    const keys=[...new Set(R.flatMap(o=>Object.keys(o.cnt)))].sort((a,b)=>ORD.indexOf(a[0])-ORD.indexOf(b[0])||a.localeCompare(b,'sv')),last=c0+Math.max(keys.length,1)-1;
+    const r1=legend?[{v:title,s:2},null,{v:'röd är inte okej byt nu',s:3},{v:'',s:3},{v:'',s:3},{v:'byte snart',s:4},{v:'',s:4},{v:'',s:4},{v:'grön är okej',s:5},{v:'',s:5},{v:'',s:5},null,{v:'Export '+today,s:17}]:[{v:title,s:2}];
+    while(r1.length<c0)r1.push(null);let pg='';keys.forEach(kk=>{const g=kk[0];r1.push(g!==pg?{v:GL[g],s:12}:{v:'',s:12});pg=g});
+    const r2=head.map(v=>({v,s:6}));r2.push(null,{v:'ANTAL',s:13});keys.forEach(kk=>r2.push({v:kk.slice(2),s:13}));
+    const rows=[r1,r2];
+    R.forEach((o,i)=>{const r=o.x.last,rn=start+2+i,row=[{v:r.reg||r.name||'',s:7},{v:r.name||'',s:7},{v:r.plats||'',s:7},{v:r.veh||'',s:7},{v:r.prep?'':r.date,s:7},...o.cells,...o.dims.map(v=>({v:v||'',s:7})),...ex(r),null,keys.length?{f:`SUM(${col(c0)}${rn}:${col(last)}${rn})`,s:14}:{v:0,s:14}];
+      keys.forEach(kk=>row.push({v:o.cnt[kk]||'',s:14}));rows.push(row)});
+    return {rows,nh:head.length,widths:[12,20,16,16,12,...pos.map(()=>pos===SCOL?7:8),...dimH.map(()=>truck?14:20),...exH.map(h=>h==='ANTECKNING'?28:Math.max(10,h.length+2)),3,9,...keys.map(kk=>Math.max(12,kk.length))]}};
+  const types=xs=>{const M={};xs.forEach(x=>{const kt=katOf(x.last);(M[kt]=M[kt]||[]).push(x)});return Object.keys(KAT).filter(kt=>M[kt]).map(kt=>[kt,M[kt]])};
+  if(!k){types(G).forEach(([kt,L])=>{const b=block(kt,L,1,KAT[kt],true);out.push({name:KAT[kt],rows:b.rows,freeze:2,filter:`A2:${col(b.nh-1)}${b.rows.length}`,widths:b.widths})});return out}
+  /* en kund: ett blad per plats, med en del per fordonstyp */
+  const P={};G.forEach(x=>{const o=(x.last.plats||'').trim()||'Utan plats';(P[o]=P[o]||[]).push(x)});
+  const used=new Set(),sn=o=>{let b=o.replace(/[\[\]:*?\/\\]/g,' ').slice(0,31).trim()||'Plats',nm=b,i=2;while(used.has(nm.toLowerCase())||['mätningar','däck'].includes(nm.toLowerCase())){nm=b.slice(0,28)+' '+i++}used.add(nm.toLowerCase());return nm};
+  Object.keys(P).sort((a,b)=>a==='Utan plats'?1:b==='Utan plats'?-1:a.localeCompare(b,'sv')).forEach(o=>{
+    types(P[o]).forEach(([kt,L])=>{const t=' '+KAT[kt],c=o.replace(/[\[\]:*?\/\\]/g,' ').trim().slice(0,31-t.length).trim(),bl=block(kt,L,1,o+' – '+KAT[kt],true);
+      out.push({name:sn(c+t),rows:bl.rows,freeze:2,filter:`A2:${col(bl.nh-1)}${bl.rows.length}`,widths:bl.widths})})});
+  return out}
+const kNorm=v=>(v||'').trim().toLowerCase()||'utan namn',ofK=k=>r=>!k||kNorm(r.name)===kNorm(k);
+function xlsxData(k){buildRims();const R=v=>v==null?'':Math.round(v*10)/10,byD=recs.filter(ofK(k)).filter(r=>!r.prep).sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+  const M=[['Datum','Mätplats / ort','Kund','Kontaktperson','Telefon','E-post','Regnr / ID','Fordon','Fordonstyp','Mätarställning','Enhet','Fabrikat','Dimension','Antal däck','Lägsta djup (mm)','Status vid mätning','Byt nu under (mm)','Byt snart under (mm)','Ojämnt slitage','Vinterdäck','Anteckning']];
+  const D=[['Datum','Mätplats / ort','Regnr / ID','Kund','Fordonstyp','Däck','Axel','Djup (mm)','Inner (mm)','Mitt (mm)','Ytter (mm)','Ojämnt slitage','Tryck (bar)','Rek. tryck (bar)','Tryck avviker','DOT','Utförande','Fabrikat','Dimension','Nytt däck','Status vid mätning']];
+  byD.forEach(r=>{const p=prof(r),m=mn(r.d),L=labelsOf(r),ar=(r.vt||'pb')==='ar',W=wheelsOf(r.vt||'pb',r.ax||null,r.d.length);
+    const dims=r.axd&&r.axd.some(Boolean)?r.axd.map((v,k)=>'Axel '+(k+1)+': '+(dimFix(v)||'–')).join(', '):dimFix(r.dim);
+    const ue=L.filter((_,i)=>r.p3&&unev(r.p3[i]));
+    M.push([r.date,r.plats||'',r.name||'',r.contact||'',r.phone||'',r.email||'',r.reg||'',r.veh||'',KN(r),r.odo!=null?r.odo:'',r.odo!=null?(ar?'tim':'km'):'',r.brand||'',dims,r.d.length,R(m),st(m,p).t,R(p.bad),R(p.warn),ue.join(', '),wTxt(r),r.note||'']);
+    L.forEach((l,i)=>{const p3=r.p3&&r.p3[i],a=W[i]?W[i].a:Math.floor(i/2);D.push([r.date,r.plats||'',r.reg||'',r.name||'',KN(r),l,a+1,R(r.d[i]),p3?R(p3[0]):'',p3?R(p3[1]):'',p3?R(p3[2]):'',p3&&unev(p3)?'Ja':'',r.pr&&r.pr[i]!=null?r.pr[i]:'',r.axp&&r.axp[a]!=null?r.axp[a]:'',prDevR(r,i)?'Ja':'',r.dot&&r.dot[i]?dotTxt(r.dot[i]):'',RT[(r.rt||[])[i]]||'',(r.bd&&r.bd[i])||r.brand||'',dimFix((r.axd&&r.axd[a])||r.dim||''),r.nw&&r.nw[i]?'Ja':'',st(r.d[i],p).t])})});
+  const S=[['Kund','Regnr / ID','Fordon','Fordonstyp','Senast mätt','Lägsta djup (mm)','Status i dag','Byt nu under i dag (mm)','Dags för kontroll']],due=new Set(dueList().map(r=>r.id));
+  groups().filter(x=>ofK(k)(x.last)).sort((a,b)=>cn(a).localeCompare(cn(b),'sv')||(a.last.reg||'').localeCompare(b.last.reg||'','sv')).forEach(x=>{const r=x.last;S.push([r.name||'',r.reg||'',r.veh||'',KN(r),r.date,R(x.min),sOf(x).t,R(x.p.bad),due.has(r.id)?'Ja':''])});
+  return [{name:'Mätningar',rows:M,plain:1},{name:'Däck',rows:D,plain:1}]}
+async function exportXlsx(k){const msg=v=>{const e=$('repmsg');if(e)e.textContent=v;toast(v)};const n=recs.filter(ofK(k)).length;
+  if(!n){msg('Det finns inga mätningar att exportera.');return}
+  try{const blob=xlsxBlob([...sortSheets(k),...xlsxData(k)]),slug=k?String(k).trim().replace(/[^A-Za-z0-9ÅÄÖåäö]+/g,'-').replace(/^-|-$/g,'')+'-':'',fn='dackkoll-lv-'+slug+todayS()+'.xlsx';let d=null;try{d=DL}catch(e){}
+    if(d)await d.save({filename:fn,data:blob});else{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;document.body.appendChild(a);a.click();a.remove()}
+    msg('Excel-filen är sparad ('+n+' mätningar'+(k?' för '+k:'')+').')}catch(e){msg(e&&e.code==='declined'?'Sparandet avbröts.':'Det gick inte att spara Excel-filen.')}}
+async function unzipX(buf){const dv=new DataView(buf),u8=new Uint8Array(buf);let eo=-1;for(let i=u8.length-22;i>=Math.max(0,u8.length-70000);i--){if(dv.getUint32(i,true)===0x06054b50){eo=i;break}}
+  if(eo<0)throw new Error('zip');const n=dv.getUint16(eo+10,true);let p=dv.getUint32(eo+16,true);const out={},td=new TextDecoder();
+  for(let k=0;k<n;k++){const meth=dv.getUint16(p+10,true),csz=dv.getUint32(p+20,true),nl=dv.getUint16(p+28,true),xl=dv.getUint16(p+30,true),cl=dv.getUint16(p+32,true),lo=dv.getUint32(p+42,true),name=td.decode(u8.subarray(p+46,p+46+nl));p+=46+nl+xl+cl;
+    const ds=lo+30+dv.getUint16(lo+26,true)+dv.getUint16(lo+28,true),data=u8.subarray(ds,ds+csz);
+    if(!/^xl\/(workbook\.xml|_rels\/workbook\.xml\.rels|sharedStrings\.xml|worksheets\/[^/]+\.xml)$/.test(name))continue;
+    out[name]=meth===0?td.decode(data):meth===8?td.decode(await new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer()):''}
+  return out}
+async function readXlsx(buf){const F=await unzipX(buf),P=x=>new DOMParser().parseFromString(x||'<x/>','application/xml'),tx=e=>[...e.getElementsByTagName('t')].map(t=>t.textContent).join('');
+  const SS=[...P(F['xl/sharedStrings.xml']).getElementsByTagName('si')].map(tx),rel={};
+  [...P(F['xl/_rels/workbook.xml.rels']).getElementsByTagName('Relationship')].forEach(r=>rel[r.getAttribute('Id')]=r.getAttribute('Target').replace(/^\/?(xl\/)?/,''));
+  const colN=ref=>{const m=/^([A-Z]+)/.exec(ref||'');let n=0;if(m)for(const ch of m[1])n=n*26+ch.charCodeAt(0)-64;return n-1};
+  return [...P(F['xl/workbook.xml']).getElementsByTagName('sheet')].map(sh=>{const id=sh.getAttribute('r:id')||sh.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','id'),doc=P(F['xl/'+rel[id]]),rows=[];
+    [...doc.getElementsByTagName('row')].forEach(r=>{const ri=+r.getAttribute('r')-1,row=[];[...r.getElementsByTagName('c')].forEach(c=>{const t=c.getAttribute('t'),v=c.getElementsByTagName('v')[0];let val=t==='s'?SS[+(v&&v.textContent)]:t==='inlineStr'?tx(c):v?v.textContent:null;if(val!=null&&t!=='s'&&t!=='inlineStr'&&t!=='str'&&val!==''&&!isNaN(+val))val=+val;row[colN(c.getAttribute('r'))]=val});rows[ri]=row});
+    return {name:sh.getAttribute('name'),rows}})}
+function parseSortSheet(sh){const R=sh.rows,hi=R.findIndex(r=>r&&r.some(v=>typeof v==='string'&&v.trim().toUpperCase()==='REG NR'));if(hi<0)return null;
+  const H={};R[hi].forEach((v,i)=>{if(typeof v!=='string')return;const k=v.trim().toUpperCase();if(k==='DIM'){H[H.DIM1!=null?'DIM2':'DIM1']=i}else if(H[k]==null)H[k]=i});
+  const title=String(((R[0]||[]).find(v=>typeof v==='string'&&v.trim()))||sh.name).trim(),out=[];
+  const g=(r,k)=>H[k]==null?null:r[H[k]],has=v=>v!=null&&String(v).trim()!=='',pc=v=>has(v)?(typeof v==='string'&&v.includes('+')?v.split('+').length:1):0,dimv=v=>typeof v==='string'&&isDim(v)?normDim(v):'';
+  for(let i=hi+1;i<R.length;i++){const r=R[i];if(!r)continue;const reg=g(r,'REG NR');if(typeof reg!=='string'||!/[A-Za-zÅÄÖåäö]/.test(reg)||!/\d/.test(reg)||reg.trim().length>12)continue;
+    const info=typeof g(r,'INFO')==='string'?g(r,'INFO').trim():'',il=info.toLowerCase();
+    const dF=dimv(g(r,'DIM FRAM'))||dimv(g(r,'DIM1')),dD=dimv(g(r,'DIM DRIV'))||dimv(g(r,'DRIV')),dL=dimv(g(r,'DIM LÖP'))||dimv(g(r,'DIM2'));
+    const nF=Math.max(1,pc(g(r,'VF')),pc(g(r,'HF')),/dubbla styr|styr x ?2/.test(il)?2:0);
+    const DV=['VID','VYD','HID','HYD'].map(k=>g(r,k)),nD=(DV.some(has)||dD)?Math.max(1,...DV.map(pc),/dubbla driv|driv x ?2/.test(il)?2:0):0;
+    const LV=['VLÖP','HLÖP','VB','HB'].map(k=>g(r,k)),nL=(LV.some(has)||dL)?Math.max(1,...LV.map(pc)):0;
+    const ax=[...Array(nF).fill(false),...Array(nD).fill(true),...Array(nL).fill(false)],axd=[...Array(nF).fill(dF),...Array(nD).fill(dD),...Array(nL).fill(dL)];
+    const mk=typeof g(r,'FABRIKAT')==='string'?g(r,'FABRIKAT').trim():'',sl=/sl[äa]p/i.test(mk);
+    if(sl){const tx=['DIM FRAM','DIM DRIV','DRIV','DIM LÖP','DIM1','DIM2'].map(k=>g(r,k)).filter(v=>typeof v==='string'&&v.trim()).map(v=>v.trim()),isDim=v=>/\d{2,3}\s*\/\s*\d{2}|\d+([.,]\d+)?\s*R\s*\d/i.test(v);
+      const dm=tx.find(isDim)||'',am=[...tx,info,mk].map(v=>/(\d+)\s*axl/i.exec(v||'')).find(Boolean),vals=SCOL.map(k=>g(r,k)).filter(has);
+      const dual=vals.some(v=>typeof v==='string'&&v.includes('+'))||(!vals.length&&!!am),nA=Math.max(1,Math.min(8,am?+am[1]:vals.length?Math.ceil(vals.reduce((t,v)=>t+pc(v),0)/(dual?4:2)):3));
+      const extra=tx.filter(v=>!isDim(v)&&!/\d+\s*axl/i.test(v));
+      out.push({reg:normReg(reg),veh:/^sl[äa]p$/i.test(mk)?'':mk,kat:'sl',ax:Array(nA).fill(dual),axd:Array(nA).fill(normDim(dm)),note:[info,...extra].filter(Boolean).join(', ')});continue}
+    const ex2=['DIM FRAM','DIM DRIV','DRIV','DIM LÖP','DIM1','DIM2'].map(k=>g(r,k)).filter(v=>typeof v==='string'&&v.trim()&&!isDim(v)).map(v=>v.trim());
+    out.push({reg:normReg(reg),veh:mk,kat:'lb',ax,axd,note:[info,...ex2].filter(Boolean).join(', ')})}
+  return {sheet:sh.name,title,list:out}}
+let impX=null;
+async function impXlsx(inp){const f=inp.files&&inp.files[0];inp.value='';const box=$('impxbox');if(!f)return;box.innerHTML='<div class="panel"><p class="note">Läser filen …</p></div>';
+  try{if(typeof DecompressionStream==='undefined')throw new Error('nods');const S=(await readXlsx(await f.arrayBuffer())).map(parseSortSheet).filter(x=>x&&x.list.length);
+    if(!S.length){box.innerHTML='<div class="panel"><p class="note">Hittade inga flikar med kolumnen Reg nr i filen.</p></div>';return}
+    const ex=new Set(recs.map(r=>rk(r.reg)).filter(Boolean));impX=S;
+    box.innerHTML=`<div class="panel"><h2>Importera fordon från Excel</h2><p class="note" style="margin:0 0 10px">${esc(f.name)}. Fordonen läggs in som förberedda, utan djup, med axlar och dimensioner från listan. Regnr som redan finns hoppas över.</p>`
+      +`<label for="impk">Kund för alla flikar (valfritt)</label><input id="impk" placeholder="Lämna tomt för att använda flikens rubrik" oninput="document.querySelectorAll('.impkn').forEach(e=>e.placeholder=this.value||e.dataset.d)">`
+      +S.map((x,i)=>{const nn=x.list.filter(v=>!ex.has(v.reg)).length,d=x.title.replace(/^sortera\s*/i,'').trim()||x.sheet;return `<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:10px"><label class="chk" for="impc${i}"><input type="checkbox" id="impc${i}" ${nn?'checked':''}><b>${esc(x.sheet)}</b></label><p class="sub" style="margin:4px 0 6px">${x.list.length} fordon${x.list.some(v=>v.kat==='sl')?' varav '+x.list.filter(v=>v.kat==='sl').length+' släp':''}, ${nn} nya${x.list.length-nn?', '+(x.list.length-nn)+' finns redan':''}</p><div class="fields"><div><label for="impn${i}">Kund</label><input id="impn${i}" class="impkn" data-d="${esc(x.title)}" placeholder="${esc(x.title)}"></div><div><label for="impo${i}">Mätplats / ort</label><input id="impo${i}" value="${esc(d)}"></div></div></div>`}).join('')
+      +`<div class="navb"><button class="ghost" onclick="$('impxbox').innerHTML='';impX=null">Avbryt</button><button onclick="impGo()">Lägg in fordonen</button></div></div>`;
+    box.scrollIntoView({behavior:'smooth',block:'start'})}
+  catch(e){box.innerHTML='<div class="panel"><p class="note">'+(e&&e.message==='nods'?'Den här webbläsaren kan inte läsa Excel-filer. Prova Chrome, Edge eller Safari i en nyare version.':'Filen kunde inte läsas. Kontrollera att det är en .xlsx-fil.')+'</p></div>'}}
+function impGo(){if(!impX)return;const ex=new Set(recs.map(r=>rk(r.reg)).filter(Boolean)),all=$('impk').value.trim();let n=0,sk=0,b=Date.now()*1000;
+  impX.forEach((x,i)=>{if(!$('impc'+i).checked)return;const name=$('impn'+i).value.trim()||all||x.title,plats=$('impo'+i).value.trim();
+    x.list.forEach(v=>{if(ex.has(v.reg)){sk++;return}ex.add(v.reg);const nt=v.ax.reduce((s,d)=>s+(d?4:2),0);
+      recs.push({id:b+(n++),date:todayS(),name,reg:v.reg,veh:v.veh,plats,phone:'',email:'',brand:'',driver:'',dim:'',season:'x',setn:'',wt:'',odo:null,ev:'',loc:'',from:'',rim:'',tpms:false,vt:KB[v.kat],kat:v.kat,ax:v.ax,axd:v.axd,axw:v.ax.map(()=>null),note:v.note,d:Array(nt).fill(null),prep:true})})});
+  persist();impX=null;$('impxbox').innerHTML=`<div class="panel"><p><b>${n} fordon är inlagda som förberedda.</b>${sk?' '+sk+' fanns redan och hoppades över.':''}</p><p class="note">De finns under Att mäta. Fordon med Släp i kolumnen Fabrikat blev släp, resten lastbil. Ändra typen för maskiner och bussar när du mäter dem.</p></div>`;renderList();renderTools()}
+function delAllAsk(){const d=bkDays();$('delall').innerHTML=`<div style="margin-top:10px;padding:12px;border:1px solid var(--bad);border-radius:8px">${d!==0?'<p class="note" style="margin:0 0 8px;color:var(--bad)"><b>Ingen backup är gjord i dag.</b> Tryck på Exportera backup först om du vill kunna få tillbaka fordonen.</p>':''}<label for="delconf">Skriv RADERA för att bekräfta</label><input id="delconf" autocomplete="off" autocapitalize="characters" onkeydown="if(event.key==='Enter')delAll()"><div class="navb"><button class="ghost" onclick="$('delall').innerHTML=''">Avbryt</button><button style="background:var(--bad)" onclick="delAll()">Radera allt</button></div><p class="note" id="delmsg" role="alert" style="margin:6px 0 0"></p></div>`;$('delconf').focus()}
+function delAll(){const v=($('delconf').value||'').trim().toUpperCase();if(v!=='RADERA'){$('delmsg').textContent='Skriv RADERA i fältet för att radera.';return}
+  const n=recs.length;recs=[];openK.clear();persist();renderList();renderTools();toast(n+' mätningar är raderade')}
+const f1s=v=>String(v).replace('.',',');
+const LIM=()=>({tlbw:cfg.tlbw!=null?cfg.tlbw:5,tlw:cfg.tlw||7,tlbs:cfg.tlbs!=null?cfg.tlbs:1.6,tls:cfg.tls||5,slb:cfg.slb!=null?cfg.slb:1.6,slw:cfg.slw||3});
+function noteUpd(){const L=LIM();NOTE.tl='Lagkrav: minst 5 mm på alla däck 10 november till 10 april, annars 1,6 mm. Under vinterperioden blir däck under '+f1s(L.tlbw)+' mm röda (byt nu) och under '+f1s(L.tlw)+' mm gula. Resten av året blir däck under '+f1s(L.tlbs)+' mm röda och under '+f1s(L.tls)+' mm gula, så att du ser vilka som inte klarar vintern.';
+  NOTE.sl='Lagkrav: minst 1,6 mm för släp till tung lastbil eller buss, året runt. Däck under '+f1s(L.slb)+' mm blir röda och under '+f1s(L.slw)+' mm gula. Välj axelupplägg eller antal axlar och vilka som har dubbelmontage.'}
+function cfgSet(k,v,num){if(num){v=parseFloat(String(v).replace(',','.'));if(isNaN(v))return}cfg[k]=v;try{localStorage.setItem(KEY+'-cfg',JSON.stringify(cfg))}catch(e){}noteUpd();
+  if(k==='plats')$('plats').value=v;if(k==='bp')$('bp').value=v;if(k==='wp')$('wp').value=v;if(k==='p3'){$('p3t').checked=!!v;xToggle(true)}if(k==='xt'){$('xt').checked=!!v;xToggle(true)}
+  try{$('rule').textContent=NOTE[$('vt').value]||'';upd()}catch(e){}{const e=$('limwarn');if(e)e.textContent=limWarn()}toast('Inställningen är sparad')}
+function limWarn(){const L=LIM(),w=[];if(L.tlbw<5)w.push('Byt nu för lastbil och buss under vinterperioden är lägre än lagkravet 5 mm.');if(L.tlbs<1.6)w.push('Byt nu för lastbil och buss resten av året är lägre än lagkravet 1,6 mm.');if(L.slb<1.6)w.push('Byt nu för släp är lägre än lagkravet 1,6 mm.');
+  if(L.tlw<=L.tlbw||L.tls<=L.tlbs||L.slw<=L.slb)w.push('Byt snart bör vara högre än byt nu, annars blir inga däck gula.');return w.join(' ')}
+function limReset(){['tlbw','tlw','tlbs','tls','slb','slw'].forEach(k=>delete cfg[k]);try{localStorage.setItem(KEY+'-cfg',JSON.stringify(cfg))}catch(e){}noteUpd();renderInst();try{$('rule').textContent=NOTE[$('vt').value]||'';upd()}catch(e){}toast('Standardgränserna är återställda')}
+function renderInst(){const num=(k,l,d,step,help)=>`<div><label for="c_${k}">${l}</label><input id="c_${k}" type="number" inputmode="decimal" step="${step||0.5}" min="0" value="${cfg[k]!=null?cfg[k]:d}" onchange="cfgSet('${k}',this.value,1)">${help?`<p class="note" style="margin:4px 0 0">${help}</p>`:''}</div>`;
+  const chk=(k,l)=>`<label class="chk" for="c_${k}" style="margin:6px 0"><input id="c_${k}" type="checkbox"${cfg[k]?' checked':''} onchange="cfgSet('${k}',this.checked)">${l}</label>`;
+  $('instset').innerHTML=`<div class="panel"><h2>Mätning</h2><div class="fields">
+      <div class="full"><label for="c_plats">Standard mätplats / ort</label><input id="c_plats" list="platslist" value="${esc(cfg.plats||'')}" placeholder="t.ex. Verkstaden Umeå" onchange="cfgSet('plats',this.value.trim())"><p class="note" style="margin:4px 0 0">Fylls i automatiskt på nya mätningar. Ändras också när du sparar en mätning med en annan plats.</p></div>
+      <div class="full">${chk('p3','Tre mätpunkter per däck (inner, mitt, ytter) från början')}${chk('xt','Visa tryck, DOT och regummerat eller omskuret från början')}</div>
+      <div><label for="c_int">Kontroll var</label><select id="c_int" onchange="cfgSet('int',+this.value)">${[1,2,3,4,6,12].map(m=>`<option value="${m}"${m===(cfg.int||3)?' selected':''}>${m} ${m===1?'månad':'månader'}</option>`).join('')}</select><p class="note" style="margin:4px 0 0">Styr listan Dags för kontroll under Kunder.</p></div></div></div>`
+    +`<div class="panel"><h2>Gränser för byt nu och byt snart</h2><p class="note" style="margin:0 0 10px">Röd (byt nu) under den första gränsen, gul (byt snart) under den andra. Lagkraven är 5 mm för lastbil och buss 10 november till 10 april, annars 1,6 mm, och 1,6 mm för släp till tunga fordon.</p>
+      <h3 style="margin:8px 0 4px">Lastbil och buss, 10 november till 10 april</h3><div class="fields">${num('tlbw','Byt nu under (mm)',5)}${num('tlw','Byt snart under (mm)',7)}</div>
+      <h3 style="margin:12px 0 4px">Lastbil och buss, resten av året</h3><div class="fields">${num('tlbs','Byt nu under (mm)',1.6,0.1)}${num('tls','Byt snart under (mm)',5)}</div>
+      <h3 style="margin:12px 0 4px">Släp</h3><div class="fields">${num('slb','Byt nu under (mm)',1.6,0.1)}${num('slw','Byt snart under (mm)',3)}</div>
+      <p class="note" id="limwarn" role="alert" style="color:var(--bad)">${limWarn()}</p>
+      <button class="ghost" style="margin-top:8px" onclick="limReset()">Återställ standardgränser</button></div>`
+    +`<div class="panel"><h2>Maskiner, standardgränser</h2><p class="note" style="margin:0 0 10px">Används för nya maskiner. Gränserna kan ändras per mätning.</p><div class="fields">${num('bp','Byt nu vid (% kvar)',20,1)}${num('wp','Byt snart vid (% kvar)',40,1)}</div></div>`
+    +`<div class="panel"><h2>Däcktryck</h2><div class="fields">${num('prTol','Tillåten avvikelse från rekommenderat tryck (%)',10,1,'Uppmätt tryck som avviker mer markeras. Rekommenderat tryck anges per axel i steg 3 när du mäter.')}</div></div>`
+    +`<div class="panel"><h2>Konto och synk</h2>${sess?`<p>Inloggad som <b>${esc(sess.email||'')}</b>${isMember===false?' <span class="pill warn">inte behörig än</span>':''}</p>`:'<p>Inte inloggad. Mätningarna sparas bara i den här telefonen.</p>'}<p class="note" style="margin:0 0 10px">${pend.size+pendDel.size?(pend.size+pendDel.size)+' ändringar väntar på att skickas. ':'Allt är skickat. '}${lastSync?'Senast synkad '+new Date(lastSync).toLocaleString('sv-SE')+'.':''}</p><div style="display:flex;gap:8px;flex-wrap:wrap">${sess?'<button onclick="syncNow().then(renderInst)">Synka nu</button><button class="ghost" onclick="logout()">Logga ut</button>':'<button onclick="showLogin()">Logga in</button>'}</div>${sess?'<div class="fields" style="margin-top:12px"><div><label for="np">Nytt lösenord</label><input id="np" type="password" autocomplete="new-password"></div><div><button class="ghost" style="margin-top:26px" onclick="setPassword()">Byt lösenord</button></div></div>':''}${sess&&isMember?'<h3 style="margin:14px 0 4px">Användare</h3><div id="mbrs"><p class="note">Hämtar …</p></div>':''}</div>`
+    +`<div class="panel"><h2>Om inställningarna</h2><p class="note" style="margin:0">Inställningarna sparas i den här telefonen, så andra enheter har sina egna. Fordon och mätningar delas via databasen när du är inloggad. Appen fungerar utan internet. Det du mäter skickas när du får täckning igen.</p></div>`;
+  renderTools();loadMembers()}
+function renderTools(){const D=dupNames();
+  $('tools').innerHTML='<h2>Säkerhetskopia och städning</h2><p class="note">All data finns i telefonen och, när du är inloggad, i databasen. Spara en kopia regelbundet. '+bkNote()+'</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button onclick="exportData()">Exportera backup</button><button class="ghost" onclick="exportXlsx()">Exportera till Excel</button><label class="ghost" for="impx" style="display:inline-block;padding:10px 14px;border:1px solid var(--line);border-radius:8px;font-weight:600;cursor:pointer">Importera fordon från Excel</label><input id="impx" type="file" accept=".xlsx" style="position:absolute;width:1px;height:1px;opacity:0" onchange="impXlsx(this)"><label class="ghost" for="impf" style="display:inline-block;padding:10px 14px;border:1px solid var(--line);border-radius:8px;font-weight:600;cursor:pointer">Importera backup</label><input id="impf" type="file" accept=".json,application/json" style="position:absolute;width:1px;height:1px;opacity:0" onchange="importData(this)"></div><p class="note" id="bkmsg"></p>'
+  +'<h2 style="margin-top:16px">Möjliga dubbletter av kunder</h2>'+(D.length?D.map(([a,b],i)=>`<div class="tr"><span>${esc(a)} och ${esc(b)}</span><span><button class="ghost" onclick="mergeNames(${JSON.stringify(a).replace(/"/g,'&quot;')},${JSON.stringify(b).replace(/"/g,'&quot;')},this)">Slå ihop till ${esc(b)}</button> <button class="ghost" onclick="mergeNames(${JSON.stringify(b).replace(/"/g,'&quot;')},${JSON.stringify(a).replace(/"/g,'&quot;')},this)">Till ${esc(a)}</button></span></div>`).join(''):'<p class="note">Inga liknande kundnamn hittades.</p>');
+  $('tools').insertAdjacentHTML('beforeend',`<h2 style="margin-top:16px">Radera alla fordon</h2><p class="note" style="margin:0 0 8px">Tar bort alla ${new Set(recs.map(r=>rk(r.reg)||(r.name||'').trim().toLowerCase())).size} fordon och ${recs.length} mätningar, även i den delade databasen. Det går inte att ångra, så gör en backup först.</p><button class="ghost" style="color:var(--bad);border:1px solid var(--bad)" onclick="delAllAsk()"${recs.length?'':' disabled'}>Radera alla fordon</button><div id="delall"></div>`)}
+
+const bkNote=()=>{const d=bkDays();return d==null?'<b style="color:var(--warn)">Ingen backup är sparad än.</b>':d>30?'<b style="color:var(--warn)">Senaste backup var för '+d+' dagar sedan.</b>':'Senaste backup: '+(d===0?'i dag':d===1?'i går':d+' dagar sedan')+'.'};
+const bkDays=()=>{let d='';try{d=(localStorage.getItem('dackkoll-lv-lastbackup')||'').replace(/"/g,'')}catch(e){}if(!/^\d{4}-\d{2}-\d{2}$/.test(d))return null;return Math.max(0,Math.round((Date.parse(todayS())-Date.parse(d))/864e5))};
+async function exportData(){const m=$('bkmsg');try{const blob=new Blob([JSON.stringify({app:'dackkoll-lv',v:1,date:new Date().toISOString(),recs,cfg})],{type:'application/json'}),fn='dackkoll-lv-backup-'+todayS()+'.json';
+  let d=null;try{d=DL}catch(e){}
+  if(d){await d.save({filename:fn,data:blob})}else{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;document.body.appendChild(a);a.click();a.remove()}
+  lset('dackkoll-lv-lastbackup',todayS());try{renderTools()}catch(e){}{const b=$('bkmsg');if(b)b.textContent='Backupen är sparad ('+recs.length+' mätningar).'}setStatus()}catch(e){m.textContent=e&&e.code==='declined'?'Sparandet avbröts.':'Det gick inte att spara backupen.'}}
+function importData(inp){const f=inp.files&&inp.files[0],m=$('bkmsg');if(!f)return;const rd=new FileReader();
+  rd.onload=()=>{try{const j=JSON.parse(rd.result);if(!j||!Array.isArray(j.recs))throw 0;const ids=new Set(recs.map(r=>r.id));let n=0;j.recs.forEach(r=>{if(r&&r.id!=null&&Array.isArray(r.d)&&r.vt&&r.vt!=='pb'&&!ids.has(r.id)){if(r.reg)r.reg=normReg(r.reg);recs.push(r);ids.add(r.id);n++}});persist();renderList();renderTools();$('bkmsg').textContent=n+' nya mätningar lades till. Personbilar och mätningar som redan fanns hoppades över.'}catch(e){$('bkmsg').textContent='Filen är ingen giltig Däckkoll-backup.'}inp.value=''};
+  rd.onerror=()=>{m.textContent='Filen kunde inte läsas.'};rd.readAsText(f)}
+function dueList(){const mo=cfg.int||3,lim=new Date();lim.setMonth(lim.getMonth()-mo);const ls=lim.toLocaleDateString('sv-SE'),V={};
+  recs.forEach(r=>{const k=rk(r.reg)||(r.name||'').trim().toLowerCase();if(!k)return;if(!V[k]||r.date>V[k].date||(r.date===V[k].date&&r.id>V[k].id))V[k]=r});
+  return Object.values(V).filter(r=>r.date<ls).sort((a,b)=>(a.name||'').localeCompare(b.name||'','sv')||a.date.localeCompare(b.date))}
+function setInt(v){cfg.int=+v||3;try{localStorage.setItem(KEY+'-cfg',JSON.stringify(cfg))}catch(e){}renderList()}
+function dueGo(reg){editId=null;$('editbar').hidden=true;location.hash='#mat';$('reg').value=reg;lastReg='';goStep(1);nextStep()}
+let amQ='';
+function renderAm(){const box=$('amlist');if(!box)return;const q=amQ.trim().toLowerCase();
+  const P=groups().filter(x=>x.last.prep).map(x=>x.last).filter(r=>!q||((r.reg||'')+' '+(r.veh||'')+' '+(r.name||'')+' '+(r.plats||'')).toLowerCase().includes(q)).sort((a,b)=>(a.reg||'').localeCompare(b.reg||'','sv',{numeric:true})),PG={};
+  P.forEach(r=>{const n=(r.name||'').trim()||'Utan namn',o=(r.plats||'').trim()||'Utan plats';((PG[n]=PG[n]||{})[o]=PG[n][o]||[]).push(r)});
+  const row=r=>`<div class="tr"><span><b>${esc(r.reg||r.name)}</b><span class="sub blk">${esc(KN(r))}${r.veh?' · '+esc(r.veh):''}</span></span><span style="display:flex;gap:6px">${r.reg?`<button onclick='dueGo(${esc(JSON.stringify(r.reg))})'>Mät</button>`:`<button onclick="editRec(${r.id})">Mät</button>`}<button class="ghost" onclick="editRec(${r.id},2)">Ändra</button></span></div>`;
+  const kn=Object.keys(PG).sort((a,b)=>a.localeCompare(b,'sv'));
+  box.innerHTML=!P.length?'<p class="note">Inga träffar.</p>':kn.map(n=>{const O=PG[n],on=Object.keys(O).sort((a,b)=>a==='Utan plats'?1:b==='Utan plats'?-1:a.localeCompare(b,'sv')),cnt=on.reduce((t,o)=>t+O[o].length,0),k1='am|'+n;
+      return `<details class="fold amk" data-k="${esc(k1)}"${q||kn.length===1||openK.has(k1)?' open':''}><summary onclick="togK(this)"><span><b>${esc(n)}</b><span class="sub" style="margin-left:10px">${cnt} fordon</span></span></summary><div style="padding:0 10px 10px">`
+        +on.map(o=>{const k2=k1+'|'+o;return `<details class="fold amp" data-k="${esc(k2)}"${q||on.length===1||openK.has(k2)?' open':''}><summary onclick="togK(this)"><span>${esc(o)}<span class="sub" style="margin-left:10px">${O[o].length} fordon</span></span></summary><div style="padding:0 14px 8px">${O[o].map(row).join('')}</div></details>`}).join('')
+        +'</div></details>'}).join('')}
+function renderDue(){const P=groups().filter(x=>x.last.prep).map(x=>x.last).sort((a,b)=>(a.reg||'').localeCompare(b.reg||'','sv',{numeric:true})),PG={};
+  P.forEach(r=>{const n=(r.name||'').trim()||'Utan namn',o=(r.plats||'').trim()||'Utan plats';((PG[n]=PG[n]||{})[o]=PG[n][o]||[]).push(r)});
+  const row=r=>`<div class="tr"><span><b>${esc(r.reg||r.name)}</b><span class="sub blk">${esc(KN(r))}${r.veh?' · '+esc(r.veh):''}</span></span><span style="display:flex;gap:6px">${r.reg?`<button onclick='dueGo(${esc(JSON.stringify(r.reg))})'>Mät</button>`:`<button onclick="editRec(${r.id})">Mät</button>`}<button class="ghost" onclick="editRec(${r.id},2)">Ändra</button></span></div>`;
+  const prepHtml=P.length?`<div class="panel"><h2>Att mäta (${P.length})</h2><p class="note" style="margin:0 0 10px">Förberedda fordon som inte är mätta än, per kund och plats.</p><input id="amq" type="search" placeholder="Sök regnr eller fordon" value="${esc(amQ)}" oninput="amQ=this.value;renderAm()" style="margin-bottom:10px"><div id="amlist"></div></div>`:'';
+  const L=dueList().filter(r=>!r.prep),mo=cfg.int||3,G={};L.forEach(r=>{const n=(r.name||'').trim()||'Utan namn';(G[n]=G[n]||[]).push(r)});
+  const sel=`<label for="dint" style="margin:0">Kontroll var</label><select id="dint" onchange="setInt(this.value)" style="width:auto">${[1,2,3,4,6,12].map(m=>`<option value="${m}"${m===mo?' selected':''}>${m} ${m===1?'månad':'månader'}</option>`).join('')}</select>`;
+  $('due').innerHTML=prepHtml+`<div class="panel"><h2>Dags för kontroll${L.length?' ('+L.length+')':''}</h2><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px"><span class="note" style="margin:0">Fordon som inte mätts på ${mo} ${mo===1?'månad':'månader'}. Intervallet ändras under Inställningar.</span></div>`
+  +(L.length?Object.entries(G).map(([n,l])=>`<h3 style="margin:12px 0 2px">${esc(n)}</h3>`+l.map(r=>`<div class="tr"><span><b>${esc(r.reg||r.name)}</b><span class="sub blk">${esc(KN(r))}${r.veh?' · '+esc(r.veh):''} · senast mätt ${esc(r.date)}</span></span>${r.reg?`<button class="ghost" onclick='dueGo(${esc(JSON.stringify(r.reg))})'>Mät</button>`:''}</div>`).join('')).join(''):'<p class="note">Alla fordon är mätta inom '+mo+' '+(mo===1?'månad':'månader')+'.</p>')+'</div>';renderAm()}
+function renderList(){renderDue();
+  const q=$('q').value.trim().toLowerCase(),f=$('f').value,s=$('s').value,ft=$('ft').value;
+  const g=groups().filter(x=>(!q||(x.last.name+' '+x.last.reg+' '+x.last.phone+' '+(x.last.email||'')+' '+(x.last.veh||'')+' '+(x.last.driver||'')+' '+(x.last.plats||'')).toLowerCase().includes(q))&&(!f||sOf(x).c===f)&&(!ft||katOf(x.last)===ft));
+  const pct=x=>x.min==null?99:x.min/x.p.warn;
+  g.sort({min:(a,b)=>pct(a)-pct(b),name:(a,b)=>a.last.name.localeCompare(b.last.name,'sv'),date:(a,b)=>b.last.date.localeCompare(a.last.date)}[s]);
+  $('list').innerHTML=g.length?folders(g,!!(q||f||ft)):`<p class="empty">${recs.length?'Inga kunder matchar filtret.':'Inga kunder än. Spara en mätning under Mät så visas kunden här.'}</p>`;
+}
+function smsText(x){const r=x.last,s=sOf(x);return 'Hej! Däckkontroll '+(r.reg?r.reg+' ':'')+r.date+': lägsta däckdjup '+fmt(x.min)+' ('+s.t.toLowerCase()+').'+(s.c==='bad'?' Däcken bör bytas.':s.c==='warn'?' Däcken bör bytas snart.':'')}
+
+/* ===== Öppna gammal mätning ===== */
+function openOld(id){const r=recs.find(q=>q.id===id);if(!r)return;
+  const vk=q=>rk(q.reg)||(q.name||'').trim().toLowerCase(),upto=q=>q.date<r.date||(q.date===r.date&&q.id<=r.id);
+  const veh=recs.filter(q=>vk(q)===vk(r)&&upto(q)),l=veh.filter(q=>(q.season||'s')===(r.season||'s')&&(q.setn||'')===(r.setn||'')).sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+  const x={l,last:r,p:prof(r),min:mn(r.d),veh},latest=groups().some(g=>g.last.id===r.id);
+  repG=[x];
+  $('oldbody').innerHTML=`<p class="note noprint" style="margin:0 0 10px"><b>Mätning från ${esc(r.date)}.</b> ${latest?'Det här är den senaste mätningen av fordonet.':'Äldre mätning, visas som den var då.'}</p>`+sheetHtml(x,0,true);
+  $('oldbar').innerHTML=`<button onclick="closeOld()">Stäng</button><button class="ghost" onclick="saveRep([0])">Spara som PDF</button><button class="ghost" onclick="window.print()">Skriv ut</button><button class="ghost" onclick="editRec(${r.id});closeOld()">Redigera</button>`;
+  $('oldview').hidden=false;document.body.classList.add('oldopen');try{$('oldview').scrollTop=0}catch(e){}}
+function closeOld(){$('oldview').hidden=true;document.body.classList.remove('oldopen')}
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('oldview').hidden)closeOld()});
+function lastOdo(reg,d){const o=recs.filter(q=>rk(q.reg)===rk(reg)&&q.odo!=null).map(q=>q.odo);return o.length?Math.max(...o):(d!=null?d:null)}
+let dmgFiles=[];
+function dmgPick(inp){const f=[...(inp.files||[])];inp.value='';dmgFiles=[...dmgFiles,...f].slice(0,3);$('dmgprev').textContent=dmgFiles.length?dmgFiles.length+' foto'+(dmgFiles.length>1?'n':'')+' väljda och sparas med mätningen.':'Till exempel skador eller ojämnt slitage. Högst 3 foton.'}
+async function sendPhotos(id,files){if(!files.length)return;
+  try{const A=await claude.use('assets');if(!A){toast('Foton kan inte sparas i den här vyn');return}
+    const ids=[];for(const f of files){const b=await shrink(f);const r=await A.upload(b);if(r&&r.id)ids.push(r.id)}
+    const rec=recs.find(q=>q.id===id);if(rec&&ids.length){rec.ph=[...(rec.ph||[]),...ids];persist();toast('Fotona är sparade')}}
+  catch(e){toast('Fotona kunde inte sparas')}}
+const photosHtml=r=>r.ph&&r.ph.length?`<div class="pt noprint"><h3>Foton</h3>${r.ph.map(i=>`<a href="/_blob/${esc(i)}" target="_blank" rel="noopener"><img src="/_blob/${esc(i)}" alt="Foto"></a>`).join('')}</div>`:'';
+function gsearch(live){const v=$('gq').value.trim(),h=location.hash;
+  if(h==='#rapport'){renderRap();return}
+  if(h==='#kunder'){$('q').value=v;renderList();return}
+  if(live)return;$('q').value=v;$('f').value='';$('ft').value='';location.hash='#kunder'}
+function render(){let h=(location.hash||(MODE==='client'?'#start':'#mat')).slice(1);if(h==='klient'||h==='server'){h='mat';location.hash='#mat'}
+  const T=['mat','kunder','rapport','inst'];let t=T.includes(h)?h:'mat';
+  $('gq').hidden=!(t==='kunder'||t==='rapport');
+  T.forEach(k=>{$(k).hidden=k!==t;const a=$('t-'+k);if(a)a.setAttribute('aria-current',k===t?'page':'false')});
+  if(t==='kunder')renderList();if(t==='rapport')renderRap();if(t==='inst')renderInst()}
+addEventListener('hashchange',render);
+
+/* ===== Synk mot Supabase, fungerar offline med kö ===== */
+const SB_URL='https://slqodgcrmutfhatwgqjz.supabase.co',SB_KEY='sb_publishable_GPnl6cJbZTirEayrP-z6fQ_VwmyQcjo';
+const canon=o=>JSON.stringify(o,(k,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.keys(v).sort().reduce((a,x)=>(a[x]=v[x],a),{}):v);
+const ls=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||d)}catch(e){return JSON.parse(d)}};
+const lset=(k,v)=>{try{localStorage.setItem(k,typeof v==='string'?v:JSON.stringify(v))}catch(e){}};
+let MODE='server',synced=false,flushing=false,pulling=false,canAdmin=false,isMember=null,syncNote='',lastSync=ls('dackkoll-lv-lastsync','null');
+const later={v:false};
+const pend=new Set(ls('dackkoll-lv-pend','[]')),pendDel=new Set(ls('dackkoll-lv-pendDel','[]'));
+let lastSaved=new Map(recs.map(r=>[String(r.id),canon(r)]));
+const savePend=()=>{lset('dackkoll-lv-pend',[...pend]);lset('dackkoll-lv-pendDel',[...pendDel])};
+function trackChanges(){const cur=new Map(recs.map(r=>[String(r.id),canon(r)]));
+  cur.forEach((c,id)=>{if(lastSaved.get(id)!==c){pend.add(id);pendDel.delete(id)}});
+  lastSaved.forEach((c,id)=>{if(!cur.has(id)){pendDel.add(id);pend.delete(id)}});
+  lastSaved=cur;savePend();setStatus()}
+let sess=ls('dackkoll-lv-sess','null');
+const saveSess=v=>{sess=v;lset('dackkoll-lv-sess',v||'null')};
+const sessOf=j=>({access_token:j.access_token,refresh_token:j.refresh_token,expires_at:j.expires_at||Math.floor(Date.now()/1000)+(j.expires_in||3600),email:((j.user&&j.user.email)||'').toLowerCase()});
+async function sbAuth(path,body){const r=await fetch(SB_URL+'/auth/v1/'+path,{method:'POST',headers:{apikey:SB_KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json().catch(()=>({}));
+  if(!r.ok)throw Object.assign(new Error(j.msg||j.error_description||j.message||('HTTP '+r.status)),{status:r.status,code:j.error_code||j.error});return j}
+async function token(){if(!sess)return null;if(Date.now()/1000<sess.expires_at-60)return sess.access_token;
+  try{const j=await sbAuth('token?grant_type=refresh_token',{refresh_token:sess.refresh_token});saveSess(sessOf(j));return sess.access_token}
+  catch(e){if(e.status===400||e.status===401){saveSess(null);isMember=null;setStatus();showLogin('Du behöver logga in igen.')}throw e}}
+async function sb(path,opt){opt=opt||{};const t=await token();if(!t)throw Object.assign(new Error('noauth'),{status:401});
+  const r=await fetch(SB_URL+'/rest/v1/'+path,{method:opt.method||'GET',body:opt.body,headers:Object.assign({apikey:SB_KEY,Authorization:'Bearer '+t,'Content-Type':'application/json'},opt.headers||{})});
+  if(!r.ok){const tx=await r.text().catch(()=>'');throw Object.assign(new Error(tx||('HTTP '+r.status)),{status:r.status})}
+  const tx=await r.text();return tx?JSON.parse(tx):null}
+function setStatus(){const e=$('syncst');if(!e)return;const n=pend.size+pendDel.size,on=navigator.onLine,bk=recs.length&&(bkDays()==null||bkDays()>30)?' · backup behövs':'';
+  const who=sess?(isMember===false?'inte behörig ännu':''):'inte inloggad';
+  e.textContent=[on?'':'Offline',n?n+' väntar på att skickas':(sess&&isMember&&synced?'synkad':''),who,syncNote].filter(Boolean).join(' · ')+bk;
+  e.style.color=!on||n?'var(--warn)':''}
+function applyMode(){setStatus()}
+function pickMode(){}
+async function setMode(){render()}
+async function checkMember(){if(!sess)return false;try{const m=await sb('members?select=email,is_admin&email=eq.'+encodeURIComponent(sess.email));isMember=!!(m&&m.length);canAdmin=!!(m&&m[0]&&m[0].is_admin)}catch(e){if(e.status===401||e.status===403)isMember=false;throw e}return isMember}
+async function flush(){if(flushing||!sess||!isMember||!navigator.onLine)return;flushing=true;
+  try{const ids=[...pend];
+    for(let i=0;i<ids.length;i+=200){const part=ids.slice(i,i+200),rows=[],sent={};
+      part.forEach(id=>{const r=recs.find(x=>String(x.id)===id);if(r){rows.push({id,data:r,deleted:false});sent[id]=canon(r)}else pend.delete(id)});
+      if(rows.length)await sb('recs?on_conflict=id',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(rows)});
+      part.forEach(id=>{const r=recs.find(x=>String(x.id)===id);if(r&&canon(r)===sent[id])pend.delete(id)});savePend();setStatus()}
+    const dl=[...pendDel];
+    for(let i=0;i<dl.length;i+=200){const part=dl.slice(i,i+200);await sb('recs?on_conflict=id',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(part.map(id=>({id,data:{},deleted:true})))});part.forEach(id=>pendDel.delete(id));savePend();setStatus()}
+    syncNote=''}
+  catch(e){syncNote=e.status===401||e.status===403?'saknar behörighet':'kunde inte skicka, försöker igen'}
+  finally{flushing=false;setStatus()}}
+async function pull(){if(pulling||!sess||!isMember||!navigator.onLine)return;pulling=true;let changed=false;
+  try{const since=ls('dackkoll-lv-since','null');let off=0,max=since;
+    for(;;){const rows=await sb('recs?select=id,data,deleted,updated_at&order=updated_at.asc,id.asc&limit=1000&offset='+off+(since?'&updated_at=gt.'+encodeURIComponent(since):''));
+      (rows||[]).forEach(row=>{if(!max||row.updated_at>max)max=row.updated_at;const id=row.id;if(pend.has(id)||pendDel.has(id))return;const ix=recs.findIndex(x=>String(x.id)===id);
+        if(row.deleted){if(ix>=0){recs.splice(ix,1);changed=true}}else if(row.data&&Array.isArray(row.data.d)){const r=row.data;if(r.reg)r.reg=normReg(r.reg);if(ix>=0){if(canon(recs[ix])!==canon(r)){recs[ix]=r;changed=true}}else{recs.push(r);changed=true}}});
+      if(!rows||rows.length<1000)break;off+=1000}
+    if(max)lset('dackkoll-lv-since',max);
+    if(changed){lastSaved=new Map(recs.map(r=>[String(r.id),canon(r)]));saveLocal();fillNames()}
+    synced=true;lastSync=new Date().toISOString();lset('dackkoll-lv-lastsync',lastSync);syncNote=''}
+  catch(e){syncNote=e.status===401||e.status===403?'saknar behörighet':'kunde inte hämta, försöker igen'}
+  finally{pulling=false;setStatus()}
+  if(changed){const ae=document.activeElement;if(ae&&/^(INPUT|SELECT|TEXTAREA)$/.test(ae.tagName))later.v=true;else if(location.hash!=='#mat')try{render()}catch(e){}}}
+async function syncNow(){if(!sess||!navigator.onLine){setStatus();return}try{if(isMember==null)await checkMember();if(!isMember){setStatus();return}await flush();await pull()}catch(e){setStatus()}}
+addEventListener('focusout',()=>{if(later.v)setTimeout(()=>{const a=document.activeElement;if(later.v&&!(a&&/^(INPUT|SELECT|TEXTAREA)$/.test(a.tagName))){later.v=false;if(location.hash!=='#mat')try{render()}catch(e){}}},1500)});
+addEventListener('online',()=>{setStatus();syncNow()});addEventListener('offline',setStatus);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')syncNow()});
+setInterval(syncNow,30000);
+function showLogin(msg){$('login').hidden=false;$('lg_m').textContent=msg||'';if(sess&&sess.email)$('lg_e').value=sess.email}
+function hideLogin(){$('login').hidden=true;lset('dackkoll-lv-skiplogin','1')}
+async function doLogin(){const e=$('lg_e').value.trim().toLowerCase(),p=$('lg_p').value,m=$('lg_m');if(!e||!p){m.textContent='Fyll i e-post och lösenord.';return}
+  if(!navigator.onLine){m.textContent='Du är offline. Logga in när du har täckning.';return}m.textContent='Loggar in …';
+  try{const j=await sbAuth('token?grant_type=password',{email:e,password:p});saveSess(sessOf(j));$('lg_p').value='';$('login').hidden=true;isMember=null;await syncNow();
+    toast(isMember?'Inloggad som '+sess.email:'Inloggad. Kontot är inte behörigt än.');try{render()}catch(x){}}
+  catch(x){m.textContent=/confirm/i.test(x.message)?'Bekräfta din e-post först. Kolla inkorgen.':x.status===400?'Fel e-post eller lösenord.':'Det gick inte att logga in ('+x.message+').'}}
+async function doSignup(){const e=$('lg_e').value.trim().toLowerCase(),p=$('lg_p').value,m=$('lg_m');if(!e||p.length<8){m.textContent='Fyll i e-post och ett lösenord på minst 8 tecken.';return}
+  try{const j=await sbAuth('signup?redirect_to='+encodeURIComponent(location.origin+location.pathname),{email:e,password:p});
+    if(j.access_token){saveSess(sessOf(j));$('login').hidden=true;isMember=null;await syncNow();toast('Kontot är skapat')}else m.textContent='Kontot är skapat. Öppna länken i mejlet som skickats till '+e+' och logga sedan in här.'}
+  catch(x){m.textContent='Det gick inte att skapa kontot ('+x.message+').'}}
+async function doReset(){const e=$('lg_e').value.trim().toLowerCase(),m=$('lg_m');if(!e){m.textContent='Fyll i din e-post först.';return}
+  try{await sbAuth('recover?redirect_to='+encodeURIComponent(location.origin+location.pathname),{email:e});m.textContent='Ett mejl med länk för nytt lösenord är skickat till '+e+'.'}catch(x){m.textContent='Det gick inte att skicka mejlet ('+x.message+').'}}
+function logout(){if(pend.size+pendDel.size&&!confirmBox('lo'))return;saveSess(null);isMember=null;canAdmin=false;synced=false;setStatus();renderInst();showLogin('Du är utloggad.')}
+const cb={};function confirmBox(k){if(cb[k]&&Date.now()-cb[k]<6000)return true;cb[k]=Date.now();toast('Det finns mätningar som inte är skickade. Tryck igen för att logga ut ändå.');return false}
+/* inloggning via länk i mejl (bekräftelse eller nytt lösenord) */
+function authFromHash(){const h=location.hash||'';if(!/access_token=/.test(h))return false;const p=new URLSearchParams(h.slice(1));
+  saveSess({access_token:p.get('access_token'),refresh_token:p.get('refresh_token'),expires_at:+(p.get('expires_at')||0)||Math.floor(Date.now()/1000)+(+(p.get('expires_in')||3600)),email:''});
+  history.replaceState(null,'',location.pathname+'#mat');const typ=p.get('type');
+  fetch(SB_URL+'/auth/v1/user',{headers:{apikey:SB_KEY,Authorization:'Bearer '+sess.access_token}}).then(r=>r.json()).then(u=>{sess.email=(u.email||'').toLowerCase();saveSess(sess);syncNow();if(typ==='recovery')setTimeout(()=>{location.hash='#inst';toast('Välj ett nytt lösenord under Inställningar')},300)}).catch(()=>{});return true}
+async function setPassword(){const p=$('np').value;if(p.length<8){toast('Lösenordet måste ha minst 8 tecken');return}
+  try{const t=await token();const r=await fetch(SB_URL+'/auth/v1/user',{method:'PUT',headers:{apikey:SB_KEY,Authorization:'Bearer '+t,'Content-Type':'application/json'},body:JSON.stringify({password:p})});if(!r.ok)throw new Error();$('np').value='';toast('Lösenordet är bytt')}catch(e){toast('Det gick inte att byta lösenord')}}
+async function loadMembers(){const box=$('mbrs');if(!box)return;if(!sess||!isMember){box.innerHTML='';return}
+  try{const L=await sb('members?select=email,is_admin&order=email');box.innerHTML=L.map(m=>`<div class="tr"><span>${esc(m.email)}${m.is_admin?' <span class="pill ok">admin</span>':''}</span>${canAdmin&&m.email!==sess.email?`<button class="ghost" onclick='delMember(${esc(JSON.stringify(m.email))},this)'>Ta bort</button>`:''}</div>`).join('')
+    +(canAdmin?`<div class="fields" style="margin-top:10px"><div><label for="nm_e">Lägg till e-post</label><input id="nm_e" type="email" autocapitalize="off" inputmode="email"></div><div><label class="chk" for="nm_a" style="margin-top:28px"><input id="nm_a" type="checkbox">Administratör</label></div></div><button onclick="addMember()" style="margin-top:8px">Lägg till</button><p class="note">Personen skapar sedan ett konto i appen med samma e-post.</p>`:'<p class="note">Bara en administratör kan lägga till användare.</p>')}
+  catch(e){box.innerHTML='<p class="note">Användarna kan bara visas när du är online.</p>'}}
+async function addMember(){const e=$('nm_e').value.trim().toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){toast('Fyll i en giltig e-post');return}
+  try{await sb('members',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({email:e,is_admin:$('nm_a').checked})});toast(e+' är tillagd');loadMembers()}catch(x){toast(x.status===409?'Personen finns redan':'Det gick inte att lägga till')}}
+async function delMember(e,b){if(b.dataset.s!=='1'){b.dataset.s='1';b.textContent='Bekräfta';return}try{await sb('members?email=eq.'+encodeURIComponent(e),{method:'DELETE',headers:{Prefer:'return=minimal'}});toast(e+' är borttagen');loadMembers()}catch(x){toast('Det gick inte att ta bort')}}
+async function initSync(){const fromMail=authFromHash();setStatus();
+  try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
+  if(!sess&&!fromMail&&!ls('dackkoll-lv-skiplogin','0'))showLogin();
+  syncNow()}
+let sampleFn=null;
+(async()=>{try{sampleFn=await claude.use('sample')}catch(e){}})();
+function shrink(f){return new Promise((res,rej)=>{const fr=new FileReader();fr.onerror=()=>rej(new Error('read'));fr.onload=()=>{const im=new Image();im.onerror=()=>rej(new Error('img'));im.onload=()=>{const k=Math.min(1,1600/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*k));c.height=Math.max(1,Math.round(im.height*k));c.getContext('2d').drawImage(im,0,0,c.width,c.height);c.toBlob(b=>b?res(b):rej(new Error('blob')),'image/jpeg',.85)};im.src=fr.result};fr.readAsDataURL(f)})}
+async function scanPlate(inp,rid,mid,cb){rid=rid||'reg';
+  const f=inp.files&&inp.files[0];inp.value='';if(!f)return;
+  const m=$(mid||'scanmsg');m.textContent='Läser registreringsnumret...';
+  try{
+    if(!sampleFn){try{sampleFn=await claude.use('sample')}catch(e){}}
+    if(!sampleFn){m.textContent='Fotoläsning fungerar bara när sidan är öppnad i Claude (webben eller appen). Skriv numret manuellt.';return}
+    const lim=await sampleFn.limits();
+    if(!lim||!lim.images){m.textContent='Den här vyn kan inte skicka bilder till Claude. Skriv numret manuellt.';return}
+    const img=await shrink(f);
+    const r=await sampleFn('Bilden visar ett fordon med en registreringsskylt. Läs av registreringsnumret. Svenska skyltar har tre bokstäver följt av tre siffror, eller tre bokstäver, två siffror och en bokstav (aldrig I, Q eller V). Svara bara med numret i versaler utan mellanslag, till exempel ABC123. Om ingen läsbar skylt syns, svara exakt INGEN.',{images:[img],modelTier:'quick'});
+    const p=normReg(r.text.trim().toUpperCase().replace(/[^A-Z0-9]/g,''));
+    if(!p||p==='INGEN'||p.length<2||p.length>8){m.textContent='Ingen skylt hittades. Ta en ny bild närmare skylten.'}
+    else if(rid!=='reg'){$(rid).value=p;m.textContent='Läste '+p+'.';if(cb)cb()}
+    else{$('reg').value=p;lookupReg('Läste '+p+'. Kontrollera att det stämmer. ')}
+  }catch(e){m.textContent=e.code==='image_rejected'?'Bilden kunde inte användas. Prova en annan.':e.code==='rate_limited'?'För många anrop just nu. Försök igen om en stund.':e.code==='not_granted'?'Du behöver tillåta Claude för att läsa skylten. Skriv numret manuellt tills dess.':'Kunde inte läsa skylten ('+((e&&e.code)||'fel')+'). Skriv numret manuellt.'}
+  finally{const sb=$('scan');if(sb)sb.disabled=false}
+}
+if(!navigator.bluetooth){$('bconn').hidden=true;const bm=$('bmsg');bm.textContent='Den här webbläsaren stöder inte Bluetooth. Använd Starta sekvens om stickan skriver in värdet som ett tangentbord, annars skriver du värdena för hand. Ordning: vänster sida framifrån och bakåt, sedan höger sida bakifrån och framåt. Med tre mätpunkter tas inner, mitt och ytter på varje däck.'}
+noteUpd();$('bp').value=cfg.bp;$('wp').value=cfg.wp;$('p3t').checked=!!cfg.p3;$('plats').value=cfg.plats||'';$('xt').checked=!!cfg.xt;
+$('date').value=new Date().toLocaleDateString('sv-SE');$('kat').value='lb';katChg();fillNames();drawSteps();applyMode();render();initSync();
+if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('sw.js').then(reg=>{reg.addEventListener('updatefound',()=>{const w=reg.installing;if(w)w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)toast('En ny version finns. Stäng och öppna appen för att använda den.')})})}).catch(()=>{})}
+</script>
+</body>
+</html>
+
+</body></html>
